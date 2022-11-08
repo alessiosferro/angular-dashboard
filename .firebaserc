@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-dashboard-baa80": {
+      "hosting": {
+        "angular-dashboard": [
+          "angular-dashboard-baa80"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-dashboard-baa80"
+  }
+}

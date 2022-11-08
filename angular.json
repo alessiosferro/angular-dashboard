@@ -100,8 +100,21 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "angular-dashboard:build:production",
+            "firebaseProject": "angular-dashboard-baa80",
+            "firebaseHostingSite": "angular-dashboard-baa80"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "52b829cc-f7c1-4c30-b8ac-b97261acc0b7"
   }
 }
