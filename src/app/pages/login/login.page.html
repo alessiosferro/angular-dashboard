@@ -1,15 +1,19 @@
-<form>
-  <div>
-    <label for="email">{{utilsService.applicationStrings.email}}</label>
-    <input [(ngModel)]="userLogin.email" [placeholder]="utilsService.applicationStrings.email" id="email" name="email"
-           type="email"/>
-  </div>
+<div class="login-page-container">
+  <form (ngSubmit)="submitHandler(form.value)" class="login-form">
+    <app-input-email
+      [group]="form"
+      [label]="utilsService.applicationStrings.email"
+      id="email"
+      name="email"
+    ></app-input-email>
 
-  <div>
-    <label for="password">{{utilsService.applicationStrings.password}}</label>
-    <input [(ngModel)]="userLogin.password" [placeholder]="utilsService.applicationStrings.password" id="password"
-           name="password" type="password">
-  </div>
+    <app-input-password
+      [group]="form"
+      [label]="utilsService.applicationStrings.password"
+      id="password"
+      name="password"
+    ></app-input-password>
 
-  <button (click)="firebaseService.createUser(userLogin)">Submit</button>
-</form>
+    <button type="submit">Submit</button>
+  </form>
+</div>

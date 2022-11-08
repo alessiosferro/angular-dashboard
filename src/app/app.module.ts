@@ -11,16 +11,25 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireAnalyticsModule} from "@angular/fire/compat/analytics";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import {LoginPage} from "./pages/login/login.page";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {InputComponent} from './components/input/input.component';
+import {InputTextComponent} from './components/input-text/input-text.component';
+import {InputPasswordComponent} from './components/input-password/input-password.component';
+import {InputEmailComponent} from './components/input-email/input-email.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginPage
+    LoginPage,
+    InputComponent,
+    InputTextComponent,
+    InputPasswordComponent,
+    InputEmailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
@@ -29,7 +38,7 @@ import {FormsModule} from "@angular/forms";
     AngularFirestoreModule,
   ],
   providers: [
-    ScreenTrackingService, UserTrackingService
+    ScreenTrackingService, UserTrackingService,
   ],
   bootstrap: [AppComponent]
 })

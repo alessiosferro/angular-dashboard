@@ -1,4 +1,4 @@
 export const strings = {
-  email: 'E-Mail',
+  email: 'Email',
   password: 'Password'
 }

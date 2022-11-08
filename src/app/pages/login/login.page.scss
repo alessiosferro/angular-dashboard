@@ -1,0 +1,21 @@
+.login-page-container {
+  min-height: 100vh;
+  display: flex;
+
+  @media (min-width: 1024px) {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.login-form {
+  width: 100%;
+  padding: 1rem;
+
+  @media (min-width: 1024px) {
+    max-width: 30rem;
+    border: .1rem solid lightgray;
+    padding: 2rem;
+    border-radius: .5rem;
+  }
+}
