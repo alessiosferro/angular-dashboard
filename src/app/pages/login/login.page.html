@@ -1,0 +1,15 @@
+<form>
+  <div>
+    <label for="email">{{utilsService.applicationStrings.email}}</label>
+    <input [(ngModel)]="userLogin.email" [placeholder]="utilsService.applicationStrings.email" id="email" name="email"
+           type="email"/>
+  </div>
+
+  <div>
+    <label for="password">{{utilsService.applicationStrings.password}}</label>
+    <input [(ngModel)]="userLogin.password" [placeholder]="utilsService.applicationStrings.password" id="password"
+           name="password" type="password">
+  </div>
+
+  <button (click)="firebaseService.createUser(userLogin)">Submit</button>
+</form>
