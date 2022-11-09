@@ -16,6 +16,7 @@ import {InputComponent} from './components/input/input.component';
 import {InputTextComponent} from './components/input-text/input-text.component';
 import {InputPasswordComponent} from './components/input-password/input-password.component';
 import {InputEmailComponent} from './components/input-email/input-email.component';
+import {ButtonComponent} from "@/components/button/button.component";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {InputEmailComponent} from './components/input-email/input-email.componen
     InputComponent,
     InputTextComponent,
     InputPasswordComponent,
-    InputEmailComponent
+    InputEmailComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,

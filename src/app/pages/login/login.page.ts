@@ -4,11 +4,13 @@ import {UtilsService} from "@/services/utils/utils.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {LoginPageForm} from "@/model/types";
 import {UserLogin} from "@/model/interfaces";
+import {fromPromise} from "rxjs/internal/observable/innerFrom";
+import {UserService} from "@/services/user/user.service";
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss']
+  styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
   form!: FormGroup<LoginPageForm>;
@@ -16,6 +18,7 @@ export class LoginPage implements OnInit {
   constructor(
     private formBuilderService: FormBuilder,
     public firebaseService: FirebaseService,
+    public userService: UserService,
     public utilsService: UtilsService
   ) {
   }
@@ -30,16 +33,15 @@ export class LoginPage implements OnInit {
   }
 
   async submitHandler(formData: Partial<UserLogin>): Promise<void> {
-    const {data, error} = await this.firebaseService.signIn(formData);
+    fromPromise(this.firebaseService.signIn(formData))
+      .subscribe(({data, error}) => {
+        if (!data) {
+          alert(error);
+          return;
+        }
 
-    if (error) {
-      alert(`Error: ${error}`);
-      return;
-    }
-
-    console.log(data);
-
-    alert(`User logged in: ${data!.user?.email}`);
-    this.form.reset();
+        this.userService.user = data;
+        this.form.reset();
+      });
   }
 }

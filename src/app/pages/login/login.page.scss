@@ -1,21 +1,25 @@
 .login-page-container {
-  min-height: 100vh;
-  display: flex;
+  padding: 4rem;
 
   @media (min-width: 1024px) {
-    align-items: center;
-    justify-content: center;
+    max-width: 50rem;
+    margin: 5rem auto 0;
   }
 }
 
 .login-form {
   width: 100%;
-  padding: 1rem;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1.6rem;
 
   @media (min-width: 1024px) {
-    max-width: 30rem;
-    border: .1rem solid lightgray;
-    padding: 2rem;
+    gap: 2.4rem;
     border-radius: .5rem;
   }
+}
+
+.welcome-user {
+  margin-top: 2.4rem;
+  max-width: 100%;
 }

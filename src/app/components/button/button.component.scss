@@ -1,0 +1,60 @@
+.button {
+  padding: 1.2rem 1.6rem;
+  font-size: 1.6rem;
+  background-color: transparent;
+  border: .1rem solid transparent;
+  border-radius: 1rem;
+  transition: background-color 200ms ease;
+  cursor: pointer;
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    max-width: 20rem;
+  }
+
+  &-primary {
+    background-color: black;
+    color: white;
+
+    &:hover {
+      color: darken(white, 5%);
+    }
+
+    &-outline {
+      border-color: black;
+      background-color: white;
+      color: black;
+
+      &:hover {
+        background-color: black;
+        color: white;
+      }
+    }
+  }
+
+  &-secondary {
+    background-color: gray;
+    color: white;
+
+    &:hover {
+      background-color: darken(gray, 2%);
+    }
+
+    &-outline {
+      border-color: gray;
+      background-color: white;
+      color: black;
+
+      &:hover {
+        background-color: gray;
+        color: white;
+      }
+    }
+  }
+}
+
+.login-button {
+  display: block;
+  max-width: inherit;
+  margin-top: 1rem;
+}
