@@ -16,7 +16,7 @@ export class LoginGuard implements CanActivate {
 
   canActivate(): Observable<boolean | UrlTree> {
     return this.angularFireAuth.user.pipe(
-      map((user) => !user || this.router.createUrlTree(['dashboard']))
+      map((user) => !user || !user.emailVerified || this.router.createUrlTree(['dashboard']))
     );
   }
 }

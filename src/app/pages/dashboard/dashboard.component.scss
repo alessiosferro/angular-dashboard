@@ -1,0 +1,11 @@
+.dashboard {
+  padding: 2rem;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 3rem;
+
+  &__user-data {
+    margin-top: 2rem;
+    overflow: hidden;
+  }
+}

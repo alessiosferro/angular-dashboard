@@ -1,34 +1,33 @@
-.login-page-container {
-  padding: 4rem;
-
-  @media (min-width: 1024px) {
-    max-width: 50rem;
-    margin: 5rem auto 0;
-  }
-}
-
 .login-form {
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
   gap: 1.6rem;
+  padding: 2rem;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     gap: 2.4rem;
     border-radius: .5rem;
   }
 
-  &-actions {
+  &__title {
+    margin: 0;
+  }
+
+  &__actions {
     display: flex;
-    gap: .8rem;
+    gap: 1.8rem;
+    margin-top: 1.2rem;
+    flex-flow: column nowrap;
+
+    @media (min-width: 768px) {
+      margin-top: 1.6rem;
+      gap: 2.8rem;
+      flex-flow: row nowrap;
+    }
 
     app-button {
       flex: 1;
     }
   }
-}
-
-.welcome-user {
-  margin-top: 2.4rem;
-  max-width: 100%;
 }

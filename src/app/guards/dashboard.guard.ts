@@ -16,7 +16,7 @@ export class DashboardGuard implements CanActivate {
 
   canActivate(): Observable<boolean | UrlTree> {
     return this.angularFireAuth.user.pipe(
-      map(user => !!user || this.router.createUrlTree(['auth', 'login']))
+      map(user => (user?.emailVerified) || this.router.createUrlTree(['auth', 'login']))
     )
   }
 }

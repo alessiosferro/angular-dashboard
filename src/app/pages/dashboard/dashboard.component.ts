@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
     this.user$ = this.activatedRouteService.data.pipe(
       map(data => data['user'])
     );
+
   }
 
   logout() {

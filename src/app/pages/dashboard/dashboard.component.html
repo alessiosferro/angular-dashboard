@@ -1,6 +1,10 @@
-<h1>Dashboard</h1>
+<div class="dashboard">
+  <h1>Dashboard</h1>
 
-<p>Your data:</p>
-<pre>{{ user$ | async | json }}</pre>
+  <div>
+    <p>Your data:</p>
+    <pre class="dashboard__user-data">{{ user$ | async | json }}</pre>
+  </div>
 
-<button (click)="logout()" type="button">Logout</button>
+  <app-button variant="secondary" (click)="logout()" label="Logout" type="button"></app-button>
+</div>

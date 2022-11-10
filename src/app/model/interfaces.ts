@@ -1,6 +1,8 @@
+import {Nullable} from "@/model/types";
+
 export interface UserLogin {
-  email: string | null;
-  password: string | null;
+  email: Nullable<string>;
+  password: Nullable<string>;
 }
 
 export interface Profile {

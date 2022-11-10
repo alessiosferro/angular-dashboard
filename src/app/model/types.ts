@@ -5,6 +5,8 @@ export type InputType = 'text' | 'email' | 'password' | 'radio' | 'checkbox';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'primary-outline' | 'secondary-outline';
 
+export type Nullable<T> = T | null;
+
 export type LoginPageForm = {
-  [T in keyof UserLogin]: FormControl<UserLogin[T] | null>
+  [T in keyof UserLogin]: FormControl<Nullable<UserLogin[T]>>
 };

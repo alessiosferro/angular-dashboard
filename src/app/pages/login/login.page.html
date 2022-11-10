@@ -1,32 +1,39 @@
-<div class="login-page-container">
-  <form (ngSubmit)="submitHandler(form.value)" class="login-form">
-    <app-input-email
-      [group]="form"
-      [label]="utilsService.applicationStrings.email"
-      id="email"
-      name="email"
-    ></app-input-email>
+<form (ngSubmit)="submitHandler(form.value)" class="login-form">
+  <h1 class="login-form__title" *ngIf="!isNewAccount">Login to your account</h1>
+  <h1 class="login-form__title" *ngIf="isNewAccount">Create a new account</h1>
 
-    <app-input-password
-      [group]="form"
-      [label]="utilsService.applicationStrings.password"
-      id="password"
-      name="password"
-    ></app-input-password>
+  <p *ngIf="!isNewAccount">Enter your email and password to login in the dashboard.</p>
+  <p *ngIf="isNewAccount">Enter your email and password. A verification e-mail will be sent.</p>
 
-    <div class="login-form-actions">
-      <app-button (click)="isNewAccount = true" *ngIf="!isNewAccount" label="Create a new
-      account" type="button" variant="secondary">
-      </app-button>
+  <app-input-email
+    [group]="form"
+    [label]="utilsService.applicationStrings.email"
+    id="email"
+    name="email"
+  ></app-input-email>
 
-      <app-button (click)="isNewAccount = false" *ngIf="isNewAccount" label="Have account? Login" type="button"
-                  variant="secondary">
-      </app-button>
+  <app-input-password
+    [group]="form"
+    [label]="utilsService.applicationStrings.password"
+    id="password"
+    name="password"
+  ></app-input-password>
 
-      <app-button label="Submit"
-                  type="submit"
-                  variant="primary"
-      ></app-button>
-    </div>
-  </form>
-</div>
+  <div class="login-form__actions">
+    <app-button label="Submit"
+                type="submit"
+                variant="primary"
+    ></app-button>
+
+    <app-button (click)="isNewAccount = true" *ngIf="!isNewAccount" label="Create a new
+    account" type="button" variant="secondary">
+    </app-button>
+
+    <app-button (click)="isNewAccount = false" *ngIf="isNewAccount" label="Already have an account? Login" type="button"
+                variant="secondary">
+    </app-button>
+  </div>
+
+  <p *ngIf="isVerificationEmailSent">An email has been sent to your email address. Please check your address and verify
+    the email to login.</p>
+</form>

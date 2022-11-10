@@ -2,10 +2,10 @@ import {Component, OnInit} from "@angular/core";
 import {FirebaseService} from "@/services/firebase/firebase.service";
 import {UtilsService} from "@/services/utils/utils.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {LoginPageForm} from "@/model/types";
+import {LoginPageForm, Nullable} from "@/model/types";
 import {UserLogin} from "@/model/interfaces";
 import {Router} from "@angular/router";
-import {Observable} from "rxjs";
+import {Observable, of, switchMap, take, throwError} from "rxjs";
 import firebase from 'firebase/compat';
 
 @Component({
@@ -15,8 +15,10 @@ import firebase from 'firebase/compat';
 })
 export class LoginPage implements OnInit {
   form!: FormGroup<LoginPageForm>;
-  user$!: Observable<firebase.User | null>;
+  user$!: Observable<Nullable<firebase.User>>;
+
   isNewAccount = false;
+  isVerificationEmailSent = false;
 
   constructor(
     private formBuilderService: FormBuilder,
@@ -35,14 +37,25 @@ export class LoginPage implements OnInit {
 
   submitHandler(formData: Partial<UserLogin>) {
     if (this.isNewAccount) {
-      this.firebaseService.createUser(formData).subscribe({
-        next: () => this.router.navigate(['dashboard']),
+      this.firebaseService.createUser(formData).pipe(
+        switchMap(() => this.firebaseService.sendVerificationEmail()),
+        take(1)
+      ).subscribe({
+        next: () => {
+          this.isVerificationEmailSent = true;
+          this.isNewAccount = false;
+        },
         error: (err) => alert(err)
       });
       return;
     }
 
-    this.firebaseService.signIn(formData).subscribe({
+    this.firebaseService.signIn(formData).pipe(
+      switchMap(response => {
+        if (!response.user || response.user.emailVerified) return of(response);
+        return throwError(() => 'Check your inbox and verify the email to login in the dashboard.')
+      })
+    ).subscribe({
       next: () => this.router.navigate(['dashboard']),
       error: (err) => alert(err)
     });

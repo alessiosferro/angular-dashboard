@@ -9,7 +9,7 @@
   width: 100%;
 
   &-primary {
-    background-color: black;
+    background-color: forestgreen;
     color: white;
 
     &:hover {
@@ -17,33 +17,33 @@
     }
 
     &-outline {
-      border-color: black;
+      border-color: forestgreen;
       background-color: white;
-      color: black;
+      color: forestgreen;
 
       &:hover {
-        background-color: black;
+        background-color: forestgreen;
         color: white;
       }
     }
   }
 
   &-secondary {
-    background-color: gray;
-    color: white;
+    background-color: #bbb;
+    color: black;
 
     &:hover {
-      background-color: darken(gray, 2%);
+      background-color: darken(#bbb, 2%);
     }
 
     &-outline {
-      border-color: gray;
+      border-color: #bbb;
       background-color: white;
       color: black;
 
       &:hover {
-        background-color: gray;
-        color: white;
+        background-color: #bbb;
+        color: black
       }
     }
   }

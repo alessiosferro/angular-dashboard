@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {UserLogin} from "@/model/interfaces";
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
-import {throwError} from "rxjs";
+import {filter, Observable, switchMap, throwError} from "rxjs";
 import {strings} from "../../../strings";
 
 @Injectable({
@@ -18,6 +18,13 @@ export class FirebaseService {
     }
 
     return fromPromise(this.angularFireAuth.signInWithEmailAndPassword(email, password))
+  }
+
+  sendVerificationEmail(): Observable<void> {
+    return this.angularFireAuth.user.pipe(
+      filter(user => !!user),
+      switchMap(user => fromPromise(user!.sendEmailVerification()))
+    );
   }
 
   signOut() {
