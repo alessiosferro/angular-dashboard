@@ -14,18 +14,19 @@
       name="password"
     ></app-input-password>
 
-    <app-button className="login-button"
-                label="Submit"
-                type="submit"
-                variant="primary"
-    ></app-button>
+    <div class="login-form-actions">
+      <app-button (click)="isNewAccount = true" *ngIf="!isNewAccount" label="Create a new
+      account" type="button" variant="secondary">
+      </app-button>
+
+      <app-button (click)="isNewAccount = false" *ngIf="isNewAccount" label="Have account? Login" type="button"
+                  variant="secondary">
+      </app-button>
+
+      <app-button label="Submit"
+                  type="submit"
+                  variant="primary"
+      ></app-button>
+    </div>
   </form>
-
-  <div *ngIf="userService.user$ | async as user" class="welcome-user">
-    <p>Welcome back, {{user.user.email}}!</p>
-
-    <p>Your data:</p>
-
-    <pre>{{ user | json }}</pre>
-  </div>
 </div>

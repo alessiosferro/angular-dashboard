@@ -1,4 +1,5 @@
 export const strings = {
   email: 'Email',
-  password: 'Password'
+  password: 'Password',
+  loginFormError: 'Please enter email and password',
 }

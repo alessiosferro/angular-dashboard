@@ -8,10 +8,6 @@
   cursor: pointer;
   width: 100%;
 
-  @media (min-width: 1024px) {
-    max-width: 20rem;
-  }
-
   &-primary {
     background-color: black;
     color: white;

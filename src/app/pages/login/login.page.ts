@@ -1,11 +1,12 @@
 import {Component, OnInit} from "@angular/core";
 import {FirebaseService} from "@/services/firebase/firebase.service";
 import {UtilsService} from "@/services/utils/utils.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginPageForm} from "@/model/types";
 import {UserLogin} from "@/model/interfaces";
-import {fromPromise} from "rxjs/internal/observable/innerFrom";
-import {UserService} from "@/services/user/user.service";
+import {Router} from "@angular/router";
+import {Observable} from "rxjs";
+import firebase from 'firebase/compat';
 
 @Component({
   selector: 'app-login-page',
@@ -14,34 +15,36 @@ import {UserService} from "@/services/user/user.service";
 })
 export class LoginPage implements OnInit {
   form!: FormGroup<LoginPageForm>;
+  user$!: Observable<firebase.User | null>;
+  isNewAccount = false;
 
   constructor(
     private formBuilderService: FormBuilder,
+    private router: Router,
     public firebaseService: FirebaseService,
-    public userService: UserService,
     public utilsService: UtilsService
   ) {
   }
 
   ngOnInit() {
     this.form = this.formBuilderService.group<LoginPageForm>({
-      email: this.formBuilderService.control(''),
+      email: this.formBuilderService.control('', [Validators.email]),
       password: this.formBuilderService.control('')
-    }, {
-      updateOn: 'blur'
-    })
+    });
   }
 
-  async submitHandler(formData: Partial<UserLogin>): Promise<void> {
-    fromPromise(this.firebaseService.signIn(formData))
-      .subscribe(({data, error}) => {
-        if (!data) {
-          alert(error);
-          return;
-        }
-
-        this.userService.user = data;
-        this.form.reset();
+  submitHandler(formData: Partial<UserLogin>) {
+    if (this.isNewAccount) {
+      this.firebaseService.createUser(formData).subscribe({
+        next: () => this.router.navigate(['dashboard']),
+        error: (err) => alert(err)
       });
+      return;
+    }
+
+    this.firebaseService.signIn(formData).subscribe({
+      next: () => this.router.navigate(['dashboard']),
+      error: (err) => alert(err)
+    });
   }
 }

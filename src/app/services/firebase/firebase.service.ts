@@ -1,6 +1,9 @@
 import {Injectable} from "@angular/core";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {UserLogin} from "@/model/interfaces";
+import {fromPromise} from "rxjs/internal/observable/innerFrom";
+import {throwError} from "rxjs";
+import {strings} from "../../../strings";
 
 @Injectable({
   providedIn: 'root'
@@ -9,45 +12,23 @@ export class FirebaseService {
   constructor(private angularFireAuth: AngularFireAuth) {
   }
 
-  async signIn({email, password}: Partial<UserLogin>) {
+  signIn({email, password}: Partial<UserLogin>) {
     if (!email || !password) {
-      return {
-        data: null,
-        error: 'Please enter email and password.'
-      }
+      return throwError(() => strings.loginFormError)
     }
 
-    try {
-      return {
-        data: await this.angularFireAuth.signInWithEmailAndPassword(email, password),
-        error: null
-      }
-    } catch (error) {
-      return {
-        data: null,
-        error
-      }
-    }
+    return fromPromise(this.angularFireAuth.signInWithEmailAndPassword(email, password))
   }
 
-  async createUser({email, password}: Partial<UserLogin>) {
+  signOut() {
+    return fromPromise(this.angularFireAuth.signOut());
+  }
+
+  createUser({email, password}: Partial<UserLogin>) {
     if (!email || !password) {
-      return {
-        data: null,
-        error: 'Please enter email and password.'
-      }
+      return throwError(() => strings.loginFormError);
     }
 
-    try {
-      return {
-        data: await this.angularFireAuth.createUserWithEmailAndPassword(email, password),
-        error: null
-      };
-    } catch (error) {
-      return {
-        data: null,
-        error
-      }
-    }
+    return fromPromise(this.angularFireAuth.createUserWithEmailAndPassword(email, password));
   }
 }

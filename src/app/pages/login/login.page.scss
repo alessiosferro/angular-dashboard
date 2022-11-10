@@ -17,6 +17,15 @@
     gap: 2.4rem;
     border-radius: .5rem;
   }
+
+  &-actions {
+    display: flex;
+    gap: .8rem;
+
+    app-button {
+      flex: 1;
+    }
+  }
 }
 
 .welcome-user {

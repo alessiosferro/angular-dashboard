@@ -17,12 +17,14 @@ import {InputTextComponent} from './components/input-text/input-text.component';
 import {InputPasswordComponent} from './components/input-password/input-password.component';
 import {InputEmailComponent} from './components/input-email/input-email.component';
 import {ButtonComponent} from "@/components/button/button.component";
+import {DashboardComponent} from "@/pages/dashboard/dashboard.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPage,
     InputComponent,
+    DashboardComponent,
     InputTextComponent,
     InputPasswordComponent,
     InputEmailComponent,
