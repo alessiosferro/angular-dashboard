@@ -22,6 +22,8 @@
 
 .message-list {
   padding: 2rem;
+  height: calc(100vh - 24.1rem);
+  overflow: auto;
   background: url('/assets/message-list-background.jpg') center/cover no-repeat;
 
   &__item {
@@ -40,6 +42,11 @@
       margin-left: auto;
     }
   }
+
+  @media (min-width: 768px) {
+    height: calc(100vh - 18.4rem);
+  }
+
 }
 
 .add-message-form {

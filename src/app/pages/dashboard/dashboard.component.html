@@ -6,7 +6,7 @@
   </header>
 
   <main>
-    <section *ngIf="user$ | async as user" class="message-list">
+    <section #messageList *ngIf="user$ | async as user" class="message-list">
       <article *ngFor="let message of messages$ | async"
                [ngClass]="{'message-list__item--author': user.email === message.author}" class="message-list__item">
         <strong>{{message.author}}</strong>

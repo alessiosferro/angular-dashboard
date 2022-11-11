@@ -1,4 +1,12 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit} from "@angular/core";
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {filter, map, merge, Observable, Subject, take, takeUntil} from "rxjs";
 import firebase from "firebase/compat";
@@ -19,6 +27,9 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   messages$!: Observable<Message[]>;
   form!: FormGroup<AppForm<DashboardForm>>;
   destroy$ = new Subject<void>();
+
+  @ViewChild('messageList')
+  messageList!: ElementRef<HTMLDivElement>;
 
   constructor(
     private activatedRouteService: ActivatedRoute,
@@ -47,7 +58,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.messages$.pipe(
       takeUntil(this.destroy$)
-    ).subscribe(() => window.scrollTo({top: document.body.scrollHeight}));
+    ).subscribe(() => this.messageList.nativeElement.scrollTo({top: this.messageList.nativeElement.scrollHeight}));
   }
 
   ngOnDestroy(): void {
