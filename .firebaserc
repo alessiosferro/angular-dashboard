@@ -1,14 +1,13 @@
 {
+  "projects": {},
   "targets": {
     "angular-dashboard-baa80": {
       "hosting": {
         "angular-dashboard": [
-          "angular-dashboard-baa80"
+          "thewavechat"
         ]
       }
     }
   },
-  "projects": {
-    "default": "angular-dashboard-baa80"
-  }
+  "etags": {}
 }
