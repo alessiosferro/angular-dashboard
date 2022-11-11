@@ -1,14 +1,17 @@
 .dashboard {
   display: flex;
   flex-flow: column nowrap;
-  gap: 3rem;
 
   &-header {
     display: flex;
     flex-flow: row wrap;
+    padding: 2rem;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
     gap: .8rem;
     justify-content: space-between;
-    padding: 2rem 2rem 0;
+    border-bottom: .1rem solid #aaa;
   }
 
   &__user-data {
@@ -19,7 +22,6 @@
 
 .message-list {
   padding: 2rem;
-  border-top: .1rem solid #eee;
   background: url('/assets/message-list-background.jpg') center/cover repeat;
 
   &__item {
@@ -47,6 +49,7 @@
   background-color: #fff;
   display: flex;
   gap: 1.8rem;
+  border-top: .1rem solid #aaa;
   flex-flow: column nowrap;
 
   @media (min-width: 768px) {
