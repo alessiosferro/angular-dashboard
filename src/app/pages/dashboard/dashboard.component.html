@@ -1,6 +1,9 @@
 <div class="dashboard">
   <header class="dashboard-header">
-    <h1>TheWave Chat</h1>
+    <h1>TheWave Chat
+      <button (click)="notificationSound.play()" class="frog-button">🐸</button>
+    </h1>
+
 
     <app-button (click)="logout()" label="Logout" type="button" variant="secondary"></app-button>
   </header>
