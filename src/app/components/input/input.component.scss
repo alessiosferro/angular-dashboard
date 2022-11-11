@@ -5,14 +5,11 @@
 
   &-label {
     margin-bottom: .8rem;
+    font-weight: bold;
   }
 
   &-control {
     padding: .8rem;
     font-size: 1.6rem;
-
-    &:focus + .input-label {
-      font-weight: bold;
-    }
   }
 }

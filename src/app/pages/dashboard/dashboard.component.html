@@ -1,10 +1,27 @@
 <div class="dashboard">
-  <h1>Dashboard</h1>
+  <header class="dashboard-header">
+    <h1>Dashboard</h1>
 
-  <div>
-    <p>Your data:</p>
-    <pre class="dashboard__user-data">{{ user$ | async | json }}</pre>
-  </div>
+    <app-button (click)="logout()" label="Logout" type="button" variant="secondary"></app-button>
+  </header>
 
-  <app-button variant="secondary" (click)="logout()" label="Logout" type="button"></app-button>
+  <main>
+    <form (ngSubmit)="submitMessageHandler(form.value)" class="add-message-form">
+      <app-input-text [group]="form"
+                      label="What are you thinking?"
+                      name="text"
+                      placeholder="Insert your message..."></app-input-text>
+
+      <app-button label="Add message" type="submit" variant="primary"></app-button>
+    </form>
+    <section class="message-list">
+      <article *ngFor="let message of messages$ | async" class="message-list__item">
+        <strong>{{message.author}}</strong>
+        <p>{{message.text}}</p>
+        <small>{{message.created_at | date:"dd/MM/YYYY HH:mm:ss"}}</small>
+      </article>
+    </section>
+  </main>
+
+
 </div>

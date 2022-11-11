@@ -4,8 +4,45 @@
   flex-flow: column nowrap;
   gap: 3rem;
 
+  &-header {
+    display: flex;
+    flex-flow: row wrap;
+    gap: .8rem;
+    justify-content: space-between;
+  }
+
   &__user-data {
     margin-top: 2rem;
     overflow: hidden;
+  }
+}
+
+.message-list {
+  margin: 1rem 0;
+
+  &__item {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: .8rem;
+    margin: 2rem 0;
+  }
+}
+
+.add-message-form {
+  display: flex;
+  gap: 1.8rem;
+  flex-flow: column nowrap;
+
+  @media (min-width: 768px) {
+    flex-flow: row nowrap;
+    align-items: flex-end;
+
+    app-input-text {
+      flex-grow: 4;
+    }
+
+    app-button {
+      flex-grow: 1;
+    }
   }
 }

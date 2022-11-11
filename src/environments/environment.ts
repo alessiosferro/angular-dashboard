@@ -13,6 +13,7 @@ export const environment = {
     authDomain: 'angular-dashboard-baa80.firebaseapp.com',
     messagingSenderId: '1014553900799',
     measurementId: 'G-CS0334QRWF',
+    databaseURL: 'https://angular-dashboard-baa80-default-rtdb.europe-west1.firebasedatabase.app'
   }
 };
 

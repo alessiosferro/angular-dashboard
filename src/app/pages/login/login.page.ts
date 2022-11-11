@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {FirebaseService} from "@/services/firebase/firebase.service";
 import {UtilsService} from "@/services/utils/utils.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {LoginPageForm, Nullable} from "@/model/types";
+import {AppForm, Nullable} from "@/model/types";
 import {UserLogin} from "@/model/interfaces";
 import {Router} from "@angular/router";
 import {Observable, of, switchMap, take, throwError} from "rxjs";
@@ -14,7 +14,7 @@ import firebase from 'firebase/compat';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  form!: FormGroup<LoginPageForm>;
+  form!: FormGroup<AppForm<UserLogin>>;
   user$!: Observable<Nullable<firebase.User>>;
 
   isNewAccount = false;
@@ -29,7 +29,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    this.form = this.formBuilderService.group<LoginPageForm>({
+    this.form = this.formBuilderService.group<AppForm<UserLogin>>({
       email: this.formBuilderService.control('', [Validators.email]),
       password: this.formBuilderService.control('')
     });

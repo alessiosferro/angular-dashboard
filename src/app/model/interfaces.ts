@@ -42,9 +42,19 @@ export interface User {
   appName: string;
 }
 
+export interface Message {
+  author: string;
+  text: string;
+  created_at: string;
+}
+
 export interface UserLoginResponse {
   operationType: string;
   credential?: any;
   additionalUserInfo: AdditionalUserInfo;
   user: User;
+}
+
+export interface DashboardForm {
+  text: Nullable<string>;
 }
