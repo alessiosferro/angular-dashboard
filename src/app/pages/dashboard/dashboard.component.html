@@ -1,6 +1,6 @@
 <div class="dashboard">
   <header class="dashboard-header">
-    <h1>Dashboard</h1>
+    <h1>TheWave Chat</h1>
 
     <app-button (click)="logout()" label="Logout" type="button" variant="secondary"></app-button>
   </header>
@@ -17,6 +17,7 @@
 
     <form (ngSubmit)="submitMessageHandler(form.value)" class="add-message-form">
       <app-input-text [group]="form"
+                      autocomplete="off"
                       label="What are you thinking?"
                       name="text"
                       placeholder="Insert your message..."></app-input-text>

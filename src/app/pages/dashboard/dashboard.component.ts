@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
+import {AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {filter, map, Observable, take, tap} from "rxjs";
+import {filter, map, merge, Observable, Subject, take, takeUntil} from "rxjs";
 import firebase from "firebase/compat";
 import {FirebaseService} from "@/services/firebase/firebase.service";
 import {AngularFireDatabase} from "@angular/fire/compat/database";
@@ -14,10 +14,11 @@ import {AppForm} from "@/model/types";
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   user$!: Observable<firebase.User | null>;
   messages$!: Observable<Message[]>;
   form!: FormGroup<AppForm<DashboardForm>>;
+  destroy$ = new Subject<void>();
 
   constructor(
     private activatedRouteService: ActivatedRoute,
@@ -28,8 +29,11 @@ export class DashboardComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
-    this.messages$ = this.firebaseRealtimeDatabaseService.list<Message>('messages').valueChanges();
+  ngOnInit(): void {
+    this.messages$ = merge(
+      this.activatedRouteService.data.pipe(map(data => data['messages'])),
+      this.firebaseRealtimeDatabaseService.list<Message>('messages').valueChanges()
+    );
 
     this.form = this.formBuilderService.group<AppForm<DashboardForm>>({
       text: this.formBuilderService.control('', [Validators.required])
@@ -37,9 +41,17 @@ export class DashboardComponent implements OnInit {
 
     this.user$ = this.activatedRouteService.data.pipe(
       map(data => data['user']),
-      tap(console.log)
     );
+  }
 
+  ngAfterViewInit(): void {
+    this.messages$.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(() => window.scrollTo({top: document.body.scrollHeight}));
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
   }
 
   submitMessageHandler(formData: Partial<DashboardForm>): void {

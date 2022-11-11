@@ -5,6 +5,7 @@ import {DashboardComponent} from "@/pages/dashboard/dashboard.component";
 import {DashboardGuard} from "./guards/dashboard.guard";
 import {LoginGuard} from "./guards/login.guard";
 import {UserResolver} from "./resolvers/user.resolver";
+import {MessagesResolver} from "./resolvers/messages.resolver";
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
     canActivate: [DashboardGuard],
     resolve: {
       user: UserResolver,
+      messages: MessagesResolver,
     }
   },
   {

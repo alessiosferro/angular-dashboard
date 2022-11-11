@@ -10,6 +10,7 @@ import {FormGroup} from "@angular/forms";
 export class InputTextComponent {
   @Input() id!: string;
   @Input() name!: string;
+  @Input() autocomplete: string | undefined;
   @Input() label!: string;
   @Input() group!: FormGroup;
   @Input() placeholder = '';

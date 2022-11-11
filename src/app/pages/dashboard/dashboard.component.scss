@@ -22,7 +22,7 @@
 
 .message-list {
   padding: 2rem;
-  background: url('/assets/message-list-background.jpg') center/cover repeat;
+  background: url('/assets/message-list-background.jpg') center/cover no-repeat;
 
   &__item {
     display: flex;

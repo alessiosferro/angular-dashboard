@@ -12,6 +12,7 @@ export class InputComponent {
   @Input() id!: string;
   @Input() name!: string;
   @Input() type!: InputType;
+  @Input() autocomplete: string | undefined;
   @Input() label!: string;
   @Input() group!: FormGroup;
   @Input() placeholder!: string;
