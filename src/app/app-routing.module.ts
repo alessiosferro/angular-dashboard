@@ -12,7 +12,7 @@ const routes: Routes = [
     component: DashboardComponent,
     canActivate: [DashboardGuard],
     resolve: {
-      user: UserResolver
+      user: UserResolver,
     }
   },
   {
@@ -30,6 +30,10 @@ const routes: Routes = [
     redirectTo: 'dashboard',
     pathMatch: 'full'
   },
+  {
+    path: '**',
+    redirectTo: 'dashboard'
+  }
 ];
 
 @NgModule({

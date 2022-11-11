@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {filter, map, Observable, take} from "rxjs";
+import {filter, map, Observable, take, tap} from "rxjs";
 import firebase from "firebase/compat";
 import {FirebaseService} from "@/services/firebase/firebase.service";
 import {AngularFireDatabase} from "@angular/fire/compat/database";
@@ -36,7 +36,8 @@ export class DashboardComponent implements OnInit {
     });
 
     this.user$ = this.activatedRouteService.data.pipe(
-      map(data => data['user'])
+      map(data => data['user']),
+      tap(console.log)
     );
 
   }

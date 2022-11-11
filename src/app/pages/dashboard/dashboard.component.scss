@@ -1,5 +1,4 @@
 .dashboard {
-  padding: 2rem;
   display: flex;
   flex-flow: column nowrap;
   gap: 3rem;
@@ -9,6 +8,7 @@
     flex-flow: row wrap;
     gap: .8rem;
     justify-content: space-between;
+    padding: 2rem 2rem 0;
   }
 
   &__user-data {
@@ -18,17 +18,33 @@
 }
 
 .message-list {
-  margin: 1rem 0;
+  padding: 2rem;
+  border-top: .1rem solid #eee;
+  background: url('/assets/message-list-background.jpg') center/cover repeat;
 
   &__item {
     display: flex;
     flex-flow: column nowrap;
     gap: .8rem;
     margin: 2rem 0;
+    background-color: #fafafa;
+    border-radius: .4rem;
+    padding: 1rem;
+    width: fit-content;
+    border: .1rem solid #aaa;
+
+    &--author {
+      background-color: lighten(forestgreen, 55%);
+      margin-left: auto;
+    }
   }
 }
 
 .add-message-form {
+  position: sticky;
+  bottom: 0;
+  padding: 2rem;
+  background-color: #fff;
   display: flex;
   gap: 1.8rem;
   flex-flow: column nowrap;
