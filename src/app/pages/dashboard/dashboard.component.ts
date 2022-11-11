@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   messages$!: Observable<Message[]>;
   form!: FormGroup<AppForm<DashboardForm>>;
   destroy$ = new Subject<void>();
+  notificationSound = new Audio('/assets/frog.mp3');
 
   @ViewChild('messageList')
   messageList!: ElementRef<HTMLDivElement>;
@@ -58,7 +59,10 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.messages$.pipe(
       takeUntil(this.destroy$)
-    ).subscribe(() => this.messageList.nativeElement.scrollTo({top: this.messageList.nativeElement.scrollHeight}));
+    ).subscribe(() => {
+      this.messageList.nativeElement.scrollTo({top: this.messageList.nativeElement.scrollHeight});
+      this.notificationSound.play();
+    });
   }
 
   ngOnDestroy(): void {
