@@ -28,6 +28,8 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   form!: FormGroup<AppForm<DashboardForm>>;
   destroy$ = new Subject<void>();
   notificationSound = new Audio('/assets/frog.mp3');
+  maxLength = 160;
+  minLength = 1;
 
   @ViewChild('messageList')
   messageList!: ElementRef<HTMLDivElement>;
@@ -48,7 +50,11 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     );
 
     this.form = this.formBuilderService.group<AppForm<DashboardForm>>({
-      text: this.formBuilderService.control('', [Validators.required])
+      text: this.formBuilderService.control('', [
+        Validators.minLength(this.minLength),
+        Validators.maxLength(this.maxLength),
+        Validators.required
+      ])
     });
 
     this.user$ = this.activatedRouteService.data.pipe(
@@ -70,6 +76,8 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   submitMessageHandler(formData: Partial<DashboardForm>): void {
+    if (this.form.invalid) return;
+
     this.user$.pipe(
       filter(user => !!user),
       take(1),

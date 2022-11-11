@@ -17,10 +17,13 @@
 
     <form (ngSubmit)="submitMessageHandler(form.value)" class="add-message-form">
       <app-input-text [group]="form"
+                      [label]="'What are you thinking? (' + form.value.text!.length  + '/' + maxLength + ')'"
+                      [maxLength]="maxLength"
+                      [minLength]="minLength"
                       autocomplete="off"
-                      label="What are you thinking?"
                       name="text"
-                      placeholder="Insert your message..."></app-input-text>
+                      placeholder="Insert your message..."
+      ></app-input-text>
 
       <app-button label="Add message" type="submit" variant="primary"></app-button>
     </form>

@@ -11,6 +11,8 @@ import type {FormGroup} from "@angular/forms";
 export class InputComponent {
   @Input() id!: string;
   @Input() name!: string;
+  @Input() maxLength: number | undefined;
+  @Input() minLength: number | undefined;
   @Input() type!: InputType;
   @Input() autocomplete: string | undefined;
   @Input() label!: string;

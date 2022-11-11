@@ -14,4 +14,6 @@ export class InputTextComponent {
   @Input() label!: string;
   @Input() group!: FormGroup;
   @Input() placeholder = '';
+  @Input() maxLength: number | undefined;
+  @Input() minLength: number | undefined;
 }

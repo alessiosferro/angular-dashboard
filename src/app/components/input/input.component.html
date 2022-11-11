@@ -1,5 +1,10 @@
 <div [formGroup]="group" class="input">
-  <input [autocomplete]="autocomplete" [formControlName]="name" [id]="id" [placeholder]="placeholder || label"
+  <input [autocomplete]="autocomplete"
+         [formControlName]="name"
+         [id]="id"
+         [maxLength]="maxLength"
+         [minLength]="minLength"
+         [placeholder]="placeholder || label"
          [type]="type" class="input-control"/>
   <label [for]="id" class="input-label">{{label}}</label>
 </div>
