@@ -17,7 +17,7 @@
 
     <form (ngSubmit)="submitMessageHandler(form.value)" class="add-message-form">
       <app-input-text [group]="form"
-                      [label]="'What are you thinking? (' + form.value.text!.length  + '/' + maxLength + ')'"
+                      [label]="'What are you thinking? (' + form.value.text?.length  + '/' + maxLength + ')'"
                       [maxLength]="maxLength"
                       [minLength]="minLength"
                       autocomplete="off"

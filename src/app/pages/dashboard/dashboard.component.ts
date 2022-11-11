@@ -8,13 +8,14 @@ import {
   ViewChild
 } from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {filter, map, merge, Observable, Subject, take, takeUntil} from "rxjs";
+import {filter, map, merge, Observable, skip, Subject, switchMap, take, takeUntil} from "rxjs";
 import firebase from "firebase/compat";
 import {FirebaseService} from "@/services/firebase/firebase.service";
 import {AngularFireDatabase} from "@angular/fire/compat/database";
 import {DashboardForm, Message} from "@/model/interfaces";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AppForm} from "@/model/types";
+import {fromPromise} from "rxjs/internal/observable/innerFrom";
 
 @Component({
   selector: 'app-dashboard',
@@ -67,8 +68,14 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(() => {
       this.messageList.nativeElement.scrollTo({top: this.messageList.nativeElement.scrollHeight});
-      this.notificationSound.play();
     });
+
+    this.messages$.pipe(
+      // skip first 2 emissions to avoid the DOM exception
+      skip(2),
+      switchMap(() => fromPromise(this.notificationSound.play())),
+      takeUntil(this.destroy$),
+    ).subscribe();
   }
 
   ngOnDestroy(): void {
@@ -89,7 +96,9 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
         author: email
       });
 
-      this.form.reset();
+      this.form.reset({
+        text: ''
+      });
     });
   }
 
