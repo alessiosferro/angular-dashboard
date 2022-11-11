@@ -2,8 +2,8 @@
   <input [autocomplete]="autocomplete"
          [formControlName]="name"
          [id]="id"
-         [maxLength]="maxLength"
-         [minLength]="minLength"
+         [maxLength]="maxLength || defaultMaxLength"
+         [minLength]="minLength || defaultMinLength"
          [placeholder]="placeholder || label"
          [type]="type" class="input-control"/>
   <label [for]="id" class="input-label">{{label}}</label>

@@ -18,4 +18,7 @@ export class InputComponent {
   @Input() label!: string;
   @Input() group!: FormGroup;
   @Input() placeholder!: string;
+
+  defaultMinLength = 0;
+  defaultMaxLength = 1000;
 }
