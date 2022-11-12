@@ -1,4 +1,5 @@
 import {Nullable} from "@/model/types";
+import {SafeHtml} from "@angular/platform-browser";
 
 export interface UserLogin {
   email: Nullable<string>;
@@ -57,4 +58,14 @@ export interface UserLoginResponse {
 
 export interface DashboardForm {
   text: Nullable<string>;
+}
+
+export interface AppLink {
+  routerLink: string;
+  label: string;
+}
+
+export interface ParsedText {
+  type: 'h1' | 'h2' | 'h3' | 'strong' | 'emphasis',
+  content: SafeHtml
 }

@@ -8,6 +8,17 @@
   cursor: pointer;
   width: 100%;
 
+  &-link {
+    color: dodgerblue;
+    text-decoration: underline;
+    padding: 0;
+    border: none;
+
+    &:hover {
+      color: darken(dodgerblue, 5%);
+    }
+  }
+
   &-primary {
     background-color: forestgreen;
     color: white;

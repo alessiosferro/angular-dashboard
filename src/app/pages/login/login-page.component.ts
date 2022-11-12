@@ -3,22 +3,29 @@ import {FirebaseService} from "@/services/firebase/firebase.service";
 import {UtilsService} from "@/services/utils/utils.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AppForm, Nullable} from "@/model/types";
-import {UserLogin} from "@/model/interfaces";
+import {AppLink, UserLogin} from "@/model/interfaces";
 import {Router} from "@angular/router";
-import {Observable, of, switchMap, take, throwError} from "rxjs";
+import {Observable, of, switchMap, throwError} from "rxjs";
 import firebase from 'firebase/compat';
 
 @Component({
   selector: 'app-login-page',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  templateUrl: './login-page.component.html',
+  styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPageComponent implements OnInit {
   form!: FormGroup<AppForm<UserLogin>>;
   user$!: Observable<Nullable<firebase.User>>;
-
-  isNewAccount = false;
-  isVerificationEmailSent = false;
+  links: AppLink[] = [
+    {
+      routerLink: '/auth/register',
+      label: 'New User? Create account'
+    },
+    {
+      routerLink: '/auth/forgot-password',
+      label: 'Forgot password?'
+    }
+  ];
 
   constructor(
     private formBuilderService: FormBuilder,
@@ -36,20 +43,6 @@ export class LoginPage implements OnInit {
   }
 
   submitHandler(formData: Partial<UserLogin>) {
-    if (this.isNewAccount) {
-      this.firebaseService.createUser(formData).pipe(
-        switchMap(() => this.firebaseService.sendVerificationEmail()),
-        take(1)
-      ).subscribe({
-        next: () => {
-          this.isVerificationEmailSent = true;
-          this.isNewAccount = false;
-        },
-        error: (err) => alert(err)
-      });
-      return;
-    }
-
     this.firebaseService.signIn(formData).pipe(
       switchMap(response => {
         if (!response.user || response.user.emailVerified) return of(response);

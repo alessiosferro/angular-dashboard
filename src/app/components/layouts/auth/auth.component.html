@@ -1,0 +1,34 @@
+<form (ngSubmit)="submitForm.emit(form.value)" class="login-form">
+  <h1 class="login-form__title">{{title}}</h1>
+  <p *ngIf="copy">{{copy}}</p>
+
+  <app-input-email
+    [group]="form"
+    [label]="utilsService.applicationStrings.email"
+    id="email"
+    name="email"
+  ></app-input-email>
+
+  <app-input-password
+    *ngIf="hasPasswordControl"
+    [group]="form"
+    [label]="utilsService.applicationStrings.password"
+    id="password"
+    name="password"
+  ></app-input-password>
+
+  <div class="login-form__actions">
+    <app-button class="login-form__actions-cta"
+                label="Submit"
+                type="submit"
+                variant="primary"
+    ></app-button>
+
+    <app-button *ngFor="let link of links"
+                [label]="link.label"
+                [routerLink]="link.routerLink"
+                variant="link"></app-button>
+  </div>
+
+  <ng-content select="[submit-message]"></ng-content>
+</form>

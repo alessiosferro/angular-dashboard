@@ -10,6 +10,7 @@ import {ButtonVariant} from "@/model/types";
 export class ButtonComponent implements OnInit {
   @Input() label!: string;
   @Input() type = 'button';
+  @Input() routerLink: string | undefined;
   @Input() variant!: ButtonVariant;
   @Input() className: string | undefined;
   @Output() clickHandler = new EventEmitter<MouseEvent>();
@@ -23,6 +24,7 @@ export class ButtonComponent implements OnInit {
       'button-primary-outline': this.variant === 'primary-outline',
       'button-secondary': this.variant === 'secondary',
       'button-secondary-outline': this.variant === 'secondary-outline',
+      'button-link': this.variant === 'link',
       ...(this.className ? {[this.className]: true} : {}),
     };
   }

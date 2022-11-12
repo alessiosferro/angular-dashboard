@@ -10,25 +10,34 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireAnalyticsModule} from "@angular/fire/compat/analytics";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
-import {LoginPage} from "./pages/login/login.page";
+import {LoginPageComponent} from "@/pages/login/login-page.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {InputComponent} from './components/input/input.component';
-import {InputTextComponent} from './components/input-text/input-text.component';
-import {InputPasswordComponent} from './components/input-password/input-password.component';
-import {InputEmailComponent} from './components/input-email/input-email.component';
-import {ButtonComponent} from "@/components/button/button.component";
+import {InputComponent} from './components/atoms/input/input.component';
+import {InputTextComponent} from './components/atoms/input-text/input-text.component';
+import {InputPasswordComponent} from './components/atoms/input-password/input-password.component';
+import {InputEmailComponent} from './components/atoms/input-email/input-email.component';
+import {ButtonComponent} from "@/components/atoms/button/button.component";
 import {DashboardComponent} from "@/pages/dashboard/dashboard.component";
+import {ForgotPasswordPageComponent} from '@/pages/forgot-password/forgot-password-page.component';
+import {RegisterPageComponent} from '@/pages/register/register-page.component';
+import {AuthComponent} from './components/layouts/auth/auth.component';
+import {SafeHtmlPipe} from "./pipes/safe-html.pipe";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginPage,
+    LoginPageComponent,
     InputComponent,
     DashboardComponent,
     InputTextComponent,
     InputPasswordComponent,
     InputEmailComponent,
     ButtonComponent,
+    ForgotPasswordPageComponent,
+    RegisterPageComponent,
+    AuthComponent,
+    AuthComponent,
+    SafeHtmlPipe,
   ],
   imports: [
     BrowserModule,

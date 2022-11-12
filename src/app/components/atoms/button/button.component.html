@@ -1,0 +1,7 @@
+<a (click)="clickHandler.emit($event)" *ngIf="routerLink" [ngClass]="ngClass" [routerLink]="routerLink">{{label}}</a>
+
+<button (click)="clickHandler.emit($event)"
+        *ngIf="!routerLink"
+        [ngClass]="ngClass"
+        [type]="type"
+>{{label}}</button>
