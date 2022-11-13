@@ -6,5 +6,5 @@
          [minLength]="minLength || defaultMinLength"
          [placeholder]="placeholder || label"
          [type]="type" class="input-control"/>
-  <label [for]="id" class="input-label">{{label}}</label>
+  <label *ngIf="label" [for]="id" class="input-label">{{label}}</label>
 </div>

@@ -2,33 +2,50 @@
   <h1 class="login-form__title">{{title}}</h1>
   <p *ngIf="copy">{{copy}}</p>
 
-  <app-input-email
-    [group]="form"
-    [label]="utilsService.applicationStrings.email"
-    id="email"
-    name="email"
-  ></app-input-email>
+  <ng-container *ngIf="!showResetPasswordMessage && !showRegisterAccountMessage">
+    <app-input-email
+      [group]="form"
+      [label]="utilsService.applicationStrings.email"
+      id="email"
+      name="email"
+    ></app-input-email>
 
-  <app-input-password
-    *ngIf="hasPasswordControl"
-    [group]="form"
-    [label]="utilsService.applicationStrings.password"
-    id="password"
-    name="password"
-  ></app-input-password>
+    <app-input-password
+      *ngIf="hasPasswordControl"
+      [group]="form"
+      [label]="utilsService.applicationStrings.password"
+      id="password"
+      name="password"
+    ></app-input-password>
+  </ng-container>
+
+  <p *ngIf="showResetPasswordMessage">
+    Please check your inbox. If <strong>{{form.value.email}}</strong> exists you will receive
+    a link for resetting your password.
+  </p>
+
+  <p *ngIf="showRegisterAccountMessage">
+    An email has been sent to your account. Please check your inbox and verify the email to login.
+  </p>
 
   <div class="login-form__actions">
-    <app-button class="login-form__actions-cta"
+    <app-button *ngIf="!showResetPasswordMessage && !showRegisterAccountMessage"
+                class="login-form__actions-cta"
                 label="Submit"
                 type="submit"
                 variant="primary"
     ></app-button>
 
-    <app-button *ngFor="let link of links"
-                [label]="link.label"
-                [routerLink]="link.routerLink"
-                variant="link"></app-button>
-  </div>
+    <app-button (click)="googleHandler()"
+                iconSrc="/assets/google.png"
+                type="button"
+                variant="icon"></app-button>
 
-  <ng-content select="[submit-message]"></ng-content>
+    <ng-container *ngFor="let link of links">
+      <app-button *ngIf="link.show"
+                  [label]="link.label"
+                  [routerLink]="link.routerLink"
+                  variant="link"></app-button>
+    </ng-container>
+  </div>
 </form>

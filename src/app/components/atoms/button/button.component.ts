@@ -13,6 +13,7 @@ export class ButtonComponent implements OnInit {
   @Input() routerLink: string | undefined;
   @Input() variant!: ButtonVariant;
   @Input() className: string | undefined;
+  @Input() iconSrc: string | undefined;
   @Output() clickHandler = new EventEmitter<MouseEvent>();
 
   ngClass: { [key: string]: boolean } = {};
@@ -20,6 +21,7 @@ export class ButtonComponent implements OnInit {
   ngOnInit() {
     this.ngClass = {
       'button': true,
+      'button-icon': this.variant === 'icon',
       'button-primary': this.variant === 'primary',
       'button-primary-outline': this.variant === 'primary-outline',
       'button-secondary': this.variant === 'secondary',

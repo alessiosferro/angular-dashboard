@@ -9,15 +9,15 @@ import {UtilsService} from "@/services/utils/utils.service";
 @Component({
   selector: 'app-register',
   templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.scss']
 })
 export class RegisterPageComponent implements OnInit {
   form!: FormGroup<AppForm<UserLogin>>
-  isVerificationEmailSent = false;
+  showSubmitMessage = false;
   links: AppLink[] = [
     {
       routerLink: '/auth/login',
-      label: 'Already have account? Login'
+      label: 'Already have account? Login',
+      show: true,
     }
   ];
 
@@ -42,7 +42,7 @@ export class RegisterPageComponent implements OnInit {
       take(1)
     ).subscribe({
       next: () => {
-        this.isVerificationEmailSent = true;
+        this.showSubmitMessage = true;
       },
       error: (err) => alert(err)
     });

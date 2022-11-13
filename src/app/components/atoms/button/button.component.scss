@@ -8,6 +8,10 @@
   cursor: pointer;
   width: 100%;
 
+  &-icon {
+    padding: 0;
+  }
+
   &-link {
     color: dodgerblue;
     text-decoration: underline;

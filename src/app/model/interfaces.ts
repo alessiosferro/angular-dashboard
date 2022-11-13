@@ -44,8 +44,10 @@ export interface User {
 }
 
 export interface Message {
-  author: string;
+  email: string;
   text: string;
+  displayName: string;
+  photoURL: string;
   created_at: string;
 }
 
@@ -63,6 +65,7 @@ export interface DashboardForm {
 export interface AppLink {
   routerLink: string;
   label: string;
+  show: boolean;
 }
 
 export interface ParsedText {

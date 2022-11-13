@@ -11,7 +11,6 @@ import firebase from 'firebase/compat';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
   form!: FormGroup<AppForm<UserLogin>>;
@@ -19,11 +18,13 @@ export class LoginPageComponent implements OnInit {
   links: AppLink[] = [
     {
       routerLink: '/auth/register',
-      label: 'New User? Create account'
+      label: 'New User? Create account',
+      show: true,
     },
     {
       routerLink: '/auth/forgot-password',
-      label: 'Forgot password?'
+      label: 'Forgot password?',
+      show: true,
     }
   ];
 

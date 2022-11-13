@@ -3,12 +3,15 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {UserLogin} from "@/model/interfaces";
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
 import {filter, Observable, switchMap, throwError} from "rxjs";
+import {GoogleAuthProvider} from 'firebase/auth';
 import {strings} from "../../../strings";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
+  private googleAuthProvider = new GoogleAuthProvider();
+
   constructor(private angularFireAuth: AngularFireAuth) {
   }
 
@@ -29,6 +32,10 @@ export class FirebaseService {
 
   signOut() {
     return fromPromise(this.angularFireAuth.signOut());
+  }
+
+  loginWithGoogle() {
+    return fromPromise(this.angularFireAuth.signInWithPopup(this.googleAuthProvider));
   }
 
   createUser({email, password}: Partial<UserLogin>) {

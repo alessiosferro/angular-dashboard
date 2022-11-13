@@ -6,6 +6,7 @@ import {AppForm, Nullable} from "@/model/types";
 import {AppLink, UserLogin} from "@/model/interfaces";
 import {Observable} from "rxjs";
 import firebase from 'firebase/compat';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-auth',
@@ -17,6 +18,9 @@ export class AuthComponent implements OnInit {
   @Input() copy: string | undefined;
   @Input() links: AppLink[] = [];
   @Input() hasPasswordControl = true;
+  @Input() showResetPasswordMessage = false;
+  @Input() showRegisterAccountMessage = false;
+
   @Output() submitForm = new EventEmitter<Partial<UserLogin>>();
 
   form!: FormGroup<AppForm<UserLogin>>;
@@ -24,6 +28,7 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private formBuilderService: FormBuilder,
+    private router: Router,
     public firebaseService: FirebaseService,
     public utilsService: UtilsService
   ) {
@@ -33,6 +38,12 @@ export class AuthComponent implements OnInit {
     this.form = this.formBuilderService.group<AppForm<UserLogin>>({
       email: this.formBuilderService.control('', [Validators.email]),
       password: this.formBuilderService.control('')
+    });
+  }
+
+  googleHandler(): void {
+    this.firebaseService.loginWithGoogle().subscribe(() => {
+      this.router.navigate(['dashboard'])
     });
   }
 }

@@ -16,6 +16,8 @@ import {DashboardForm, Message} from "@/model/interfaces";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AppForm} from "@/model/types";
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {UtilsService} from "@/services/utils/utils.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -28,8 +30,9 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   messages$!: Observable<Message[]>;
   form!: FormGroup<AppForm<DashboardForm>>;
   destroy$ = new Subject<void>();
-  notificationSound = new Audio('/assets/frog.mp3');
-  maxLength = 160;
+  frogSound = new Audio('/assets/frog.mp3');
+  notificationSound = new Audio('/assets/notification.mp3');
+  maxLength = 2000;
   minLength = 1;
 
   @ViewChild('messageList')
@@ -40,7 +43,9 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     private firebaseService: FirebaseService,
     private firebaseRealtimeDatabaseService: AngularFireDatabase,
     private formBuilderService: FormBuilder,
-    private router: Router
+    private angularFireAuthService: AngularFireAuth,
+    private router: Router,
+    public utils: UtilsService
   ) {
   }
 
@@ -49,6 +54,8 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
       this.activatedRouteService.data.pipe(map(data => data['messages'])),
       this.firebaseRealtimeDatabaseService.list<Message>('messages').valueChanges()
     );
+
+    this.angularFireAuthService.user.subscribe(console.log);
 
     this.form = this.formBuilderService.group<AppForm<DashboardForm>>({
       text: this.formBuilderService.control('', [
@@ -88,12 +95,13 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.user$.pipe(
       filter(user => !!user),
       take(1),
-      map(user => user!.email)
-    ).subscribe(email => {
+    ).subscribe(user => {
       this.firebaseRealtimeDatabaseService.list('messages').push({
         created_at: new Date().toISOString(),
         text: formData.text,
-        author: email
+        email: user!.email,
+        displayName: user!.displayName,
+        photoURL: user!.photoURL
       });
 
       this.form.reset({

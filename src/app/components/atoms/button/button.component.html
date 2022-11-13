@@ -4,4 +4,7 @@
         *ngIf="!routerLink"
         [ngClass]="ngClass"
         [type]="type"
->{{label}}</button>
+>
+  <img *ngIf="iconSrc" [src]="iconSrc" alt="" height="24" width="24"/>
+  {{label}}
+</button>

@@ -6,16 +6,16 @@ import {fromPromise} from "rxjs/internal/observable/innerFrom";
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password-page.component.html',
-  styleUrls: ['./forgot-password-page.component.scss']
 })
 export class ForgotPasswordPageComponent {
-  submitMessage!: string;
+  showSubmitMessage = false;
 
   links: AppLink[] = [
     {
       routerLink: '/auth/login',
-      label: 'Remembered password? Login instead'
-    }
+      label: 'Remembered password? Login instead',
+      show: true,
+    },
   ];
 
   constructor(
@@ -29,7 +29,15 @@ export class ForgotPasswordPageComponent {
     }
 
     fromPromise(this.angularFireAuthService.sendPasswordResetEmail(formData.email)).subscribe(() => {
-      this.submitMessage = `Please check your inbox. If <strong>${formData.email}</strong> exists you will receive a link for resetting your password.`
+      this.links = [
+        {
+          routerLink: '/auth/login',
+          label: 'Back to login',
+          show: true
+        }
+      ];
+
+      this.showSubmitMessage = true;
     });
   }
 }

@@ -1,11 +1,3 @@
-.frog-button {
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 2.8rem;
-  cursor: pointer;
-  margin-left: .2rem;
-}
 
 .dashboard {
   display: flex;
@@ -13,14 +5,41 @@
 
   &-header {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     padding: 2rem;
+    align-items: center;
     position: sticky;
     top: 0;
     background-color: #fff;
     gap: .8rem;
     justify-content: space-between;
     border-bottom: .1rem solid #aaa;
+
+    &__title {
+      white-space: nowrap;
+
+      &,
+      &-frog {
+        font-size: 2.4rem;
+        line-height: 3.8rem;
+      }
+
+      &-frog {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        margin-left: .2rem;
+      }
+
+      @media (min-width: 768px) {
+        &,
+        &-frog {
+          font-size: 3.2rem;
+          line-height: 3.85rem;
+        }
+      }
+    }
   }
 
   &__user-data {
@@ -31,55 +50,65 @@
 
 .message-list {
   padding: 2rem;
-  height: calc(100vh - 24.1rem);
+  height: calc(100vh - 7.95rem * 2);
   overflow: auto;
-  background: url('/assets/message-list-background.jpg') center/cover no-repeat;
+  background: linear-gradient(to top, #03001e 0%, #7303c0 25%, #ec38bc 50%, #fdeff9 100%);
 
   &__item {
     display: flex;
-    flex-flow: column nowrap;
-    word-break: break-word;
 
-    gap: .8rem;
-    margin: 2rem 0;
-    background-color: #fafafa;
-    border-radius: .4rem;
-    padding: 1rem;
-    width: fit-content;
-    border: .1rem solid #aaa;
+    &-container {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: flex-end;
+      gap: .8rem;
+    }
 
     &--author {
-      background-color: lighten(forestgreen, 55%);
       margin-left: auto;
     }
-  }
 
-  @media (min-width: 768px) {
-    height: calc(100vh - 18.4rem);
-  }
+    &-photo {
+      border-radius: 50%;
+    }
 
+    &-message {
+      background-color: #fafafa;
+      border: .1rem solid #aaa;
+      border-radius: .4rem;
+      width: fit-content;
+      display: flex;
+      padding: 1rem;
+      flex-flow: column nowrap;
+      word-break: break-word;
+      gap: .8rem;
+
+      &--author {
+        background-color: lighten(forestgreen, 57.5%);
+      }
+    }
+
+
+    &:not(:last-child):not(:first-child) {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
 }
 
 .add-message-form {
   position: sticky;
   bottom: 0;
   padding: 2rem;
-  background-color: #fff;
+  align-items: center;
+  background-color: rgba(#fff, .8);
   display: flex;
+  justify-content: space-between;
   gap: 1.8rem;
   border-top: .1rem solid #aaa;
-  flex-flow: column nowrap;
+  flex-flow: row nowrap;
 
-  @media (min-width: 768px) {
-    flex-flow: row nowrap;
-    align-items: flex-end;
-
-    app-input-text {
-      flex-grow: 4;
-    }
-
-    app-button {
-      flex-grow: 1;
-    }
+  app-input-text {
+    flex: 1;
   }
 }
