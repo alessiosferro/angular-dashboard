@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm run check-format ||
+(
+  echo 'Prettier format failed. Please format the files with prettier and try again.'
+  false;
+)
+
+# Check ESLint Standards
+npm run check-lint ||
+(
+       echo 'ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'
+       false;
+)
+
+# Check tsconfig standards
+npm run check-types ||
+(
+   echo 'Failed Type check. Make the changes required above.'
+   false;
+)
+
+echo 'All the checks have passed, building now...'
+
+# Commit
+echo '✅ ALL GOOD! Committing now...'
+

@@ -1,5 +1,12 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {ButtonVariant} from "@/model/types";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { ButtonVariant } from '@/model/types';
 
 @Component({
   selector: 'app-button',
@@ -22,14 +29,14 @@ export class ButtonComponent implements OnInit {
 
   ngOnInit() {
     this.ngClass = {
-      'button': true,
+      button: true,
       'button-icon': this.variant === 'icon',
       'button-primary': this.variant === 'primary',
       'button-primary-outline': this.variant === 'primary-outline',
       'button-secondary': this.variant === 'secondary',
       'button-secondary-outline': this.variant === 'secondary-outline',
       'button-link': this.variant === 'link',
-      ...(this.className ? {[this.className]: true} : {}),
+      ...(this.className ? { [this.className]: true } : {}),
     };
   }
 }

@@ -1,27 +1,23 @@
-import {Nullable} from "@/model/types";
-import {SafeHtml} from "@angular/platform-browser";
+import { Nullable } from '@/model/types';
+import { SafeHtml } from '@angular/platform-browser';
 
 export interface UserLogin {
   email: Nullable<string>;
   password: Nullable<string>;
 }
 
-export interface Profile {
-}
-
 export interface AdditionalUserInfo {
   isNewUser: boolean;
   providerId: string;
-  profile: Profile;
 }
 
 export interface ProviderData {
   providerId: string;
   uid: string;
-  displayName?: any;
+  displayName?: string;
   email: string;
-  phoneNumber?: any;
-  photoURL?: any;
+  phoneNumber?: string;
+  photoURL?: string;
 }
 
 export interface StsTokenManager {
@@ -54,7 +50,7 @@ export interface Message {
 
 export interface UserLoginResponse {
   operationType: string;
-  credential?: any;
+  credential?: unknown;
   additionalUserInfo: AdditionalUserInfo;
   user: User;
 }
@@ -70,6 +66,6 @@ export interface AppLink {
 }
 
 export interface ParsedText {
-  type: 'h1' | 'h2' | 'h3' | 'strong' | 'emphasis',
-  content: SafeHtml
+  type: 'h1' | 'h2' | 'h3' | 'strong' | 'emphasis';
+  content: SafeHtml;
 }

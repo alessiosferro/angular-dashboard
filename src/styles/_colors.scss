@@ -1,0 +1,19 @@
+$color-link: dodgerblue;
+$color-cta: forestgreen;
+$color-cta-disabled: lighten($color-cta, 57.5%);
+
+$color-white: white;
+$color-white-alpha-90: rgba($color-white, 0.9);
+$color-white-alpha-40: rgba($color-white, 0.4);
+$color-white-hover: darken($color-white, 5%);
+
+$color-gray-light: #fafafa;
+$color-gray: #aaa;
+$color-gray-hover: darken($color-gray, 5%);
+
+$color-black: black;
+
+$bg-linear-gradient-1: #03001e;
+$bg-linear-gradient-2: #7303c0;
+$bg-linear-gradient-3: #ec38bc;
+$bg-linear-gradient-4: #fdeff9;

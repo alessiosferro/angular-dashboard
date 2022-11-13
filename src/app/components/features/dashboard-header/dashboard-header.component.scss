@@ -1,3 +1,5 @@
+@import "src/styles/colors";
+
 .dashboard-header {
   display: flex;
   flex-flow: row nowrap;
@@ -5,10 +7,10 @@
   align-items: center;
   position: sticky;
   top: 0;
-  background-color: #fff;
-  gap: .8rem;
+  background-color: $color-white;
+  gap: 0.8rem;
   justify-content: space-between;
-  border-bottom: .1rem solid #aaa;
+  border-bottom: 0.1rem solid $color-gray;
 
   &__title {
     white-space: nowrap;
@@ -24,7 +26,7 @@
       border: none;
       padding: 0;
       cursor: pointer;
-      margin-left: .2rem;
+      margin-left: 0.2rem;
     }
 
     @media (min-width: 768px) {

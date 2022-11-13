@@ -1,9 +1,15 @@
 <header class="dashboard-header">
   <h1 class="dashboard-header__title">
-    {{title}}
-    <button (click)="frogSound.play()" class="dashboard-header__title-frog">🐸</button>
+    {{ title }}
+    <button (click)="frogSound.play()" class="dashboard-header__title-frog">
+      🐸
+    </button>
   </h1>
 
-
-  <app-button (click)="logout()" iconSrc="/assets/logout.svg" type="button" variant="icon"></app-button>
+  <app-button
+    (click)="logout()"
+    iconSrc="/assets/logout.svg"
+    type="button"
+    variant="icon"
+  ></app-button>
 </header>

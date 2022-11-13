@@ -1,11 +1,16 @@
 <form (ngSubmit)="submitMessageHandler(form.value)" class="add-message-form">
-  <app-input-text [group]="form"
-                  [maxLength]="maxLength"
-                  [minLength]="minLength"
-                  autocomplete="off"
-                  name="text"
-                  placeholder="Add a message..."
+  <app-input-text
+    [group]="form"
+    [maxLength]="maxLength"
+    [minLength]="minLength"
+    autocomplete="off"
+    name="text"
+    placeholder="Add a message..."
   ></app-input-text>
 
-  <app-button iconSrc="/assets/send.svg" type="submit" variant="icon"></app-button>
+  <app-button
+    iconSrc="/assets/send.svg"
+    type="submit"
+    variant="icon"
+  ></app-button>
 </form>

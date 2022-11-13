@@ -1,14 +1,16 @@
+@import "src/styles/colors";
+
 .add-message-form {
   position: sticky;
   bottom: 0;
   padding: 2rem;
   align-items: center;
-  background-color: rgba(#fff, .9);
-  backdrop-filter: blur(.2rem);
+  background-color: $color-white-alpha-90;
+  backdrop-filter: blur(0.2rem);
   display: flex;
   justify-content: space-between;
   gap: 1.8rem;
-  border-top: .1rem solid #aaa;
+  border-top: 0.1rem solid $color-gray;
   flex-flow: row nowrap;
 
   app-input-text {

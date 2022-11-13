@@ -1,3 +1,6 @@
+@import "src/styles/colors";
+@import "src/styles/animations";
+
 .overlay {
   position: fixed;
   top: 0;
@@ -7,26 +10,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(white, .4)
+  background-color: $color-white-alpha-40;
 }
 
 .loading-spinner {
   width: 4.8rem;
   height: 4.8rem;
   border-color: black;
-  border-width: 0 .2rem .2rem 0;
+  border-width: 0 0.2rem 0.2rem 0;
   border-style: solid;
   border-radius: 4.8rem;
   animation: rotate 200ms linear both infinite;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0);
-  }
-
-
-  100% {
-    transform: rotate(360deg);
-  }
 }

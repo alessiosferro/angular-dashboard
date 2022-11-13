@@ -1,10 +1,32 @@
-<a (click)="clickHandler.emit($event)" *ngIf="routerLink" [ngClass]="ngClass" [routerLink]="routerLink">{{label}}</a>
-
-<button (click)="clickHandler.emit($event)"
-        *ngIf="!routerLink"
-        [ngClass]="ngClass"
-        [type]="type"
+<a
+  (click)="clickHandler.emit($event)"
+  *ngIf="routerLink"
+  [ngClass]="ngClass"
+  [routerLink]="routerLink"
+  >{{ label }}</a
 >
-  <img *ngIf="iconSrc" [height]="height" [src]="iconSrc" [width]="width" alt="" height="24" width="24"/>
-  {{label}}
+
+<button
+  (click)="clickHandler.emit($event)"
+  *ngIf="!routerLink"
+  [ngClass]="ngClass"
+  [type]="type"
+>
+  <img
+    *ngIf="iconSrc && height && width"
+    [height]="height"
+    [src]="iconSrc"
+    [width]="width"
+    alt=""
+    height="24"
+    width="24"
+  />
+  <img
+    *ngIf="iconSrc && (!height || !width)"
+    [src]="iconSrc"
+    alt=""
+    height="24"
+    width="24"
+  />
+  {{ label }}
 </button>

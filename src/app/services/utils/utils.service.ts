@@ -1,9 +1,9 @@
-import {Injectable} from "@angular/core";
-import {strings} from "../../../strings";
+import { Injectable } from '@angular/core';
+import { strings } from '../../../strings';
 import * as dayjs from 'dayjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UtilsService {
   get applicationStrings() {

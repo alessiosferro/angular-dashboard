@@ -1,12 +1,12 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {AppLink, UserLogin} from "@/model/interfaces";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {fromPromise} from "rxjs/internal/observable/innerFrom";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AppLink, UserLogin } from '@/model/interfaces';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password-page.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotPasswordPageComponent {
   showSubmitMessage = false;
@@ -19,23 +19,22 @@ export class ForgotPasswordPageComponent {
     },
   ];
 
-  constructor(
-    private angularFireAuthService: AngularFireAuth
-  ) {
-  }
+  constructor(private angularFireAuthService: AngularFireAuth) {}
 
   submitHandler(formData: Partial<UserLogin>): void {
     if (!formData.email) {
       return alert('Please insert your email');
     }
 
-    fromPromise(this.angularFireAuthService.sendPasswordResetEmail(formData.email)).subscribe(() => {
+    fromPromise(
+      this.angularFireAuthService.sendPasswordResetEmail(formData.email)
+    ).subscribe(() => {
       this.links = [
         {
           routerLink: '/auth/login',
           label: 'Back to login',
-          show: true
-        }
+          show: true,
+        },
       ];
 
       this.showSubmitMessage = true;

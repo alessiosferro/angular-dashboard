@@ -1,44 +1,82 @@
 <section *ngIf="user$ | async as user" class="message-list">
-  <article *ngFor="let message of messages$ | async"
-           class="message-list__item">
-    <div [class.message-list__item--author]="user.email === message.email" class="message-list__item-container">
-      <img *ngIf="user.email !== message.email && message.photoURL" [alt]="message.email + ' profile picture'"
-           [class.message-list__item-photo--author]="user.email === message.email"
-           [src]="message.photoURL"
-           class="message-list__item-photo" height="32"/>
-      <button (click)="selectedMessageId = message.id"
-              [class.message-list__item-message--author]="user.email === message.email"
-              [disabled]="message.email === user.email"
-              class="message-list__item-message">
+  <article *ngFor="let message of messages$ | async" class="message-list__item">
+    <div
+      [class.message-list__item--author]="user.email === message.email"
+      class="message-list__item-container"
+    >
+      <img
+        *ngIf="user.email !== message.email && message.photoURL"
+        [alt]="message.email + ' profile picture'"
+        [class.message-list__item-photo--author]="user.email === message.email"
+        [src]="message.photoURL"
+        class="message-list__item-photo"
+        height="32"
+      />
+      <button
+        (click)="selectedMessageId = message.id"
+        [class.message-list__item-message--author]="
+          user.email === message.email
+        "
+        [disabled]="message.email === user.email"
+        class="message-list__item-message"
+      >
         <ng-container *ngIf="user.email !== message.email">
-          <strong *ngIf="message.displayName">{{message.displayName}}</strong>
-          <strong *ngIf="!message.displayName">{{message.email}}</strong>
+          <strong *ngIf="message.displayName">{{ message.displayName }}</strong>
+          <strong *ngIf="!message.displayName">{{ message.email }}</strong>
         </ng-container>
 
-        <div *ngIf="selectedMessageId === message.id"
-             class="message-list__item-message__emoji-picker">
-          <input class="message-list__item-message__emoji-picker__emoji" type="button" value="🐸"/>
-          <input class="message-list__item-message__emoji-picker__emoji" type="button" value="😂"/>
-          <input class="message-list__item-message__emoji-picker__emoji" type="button" value="🌊"/>
-          <input class="message-list__item-message__emoji-picker__emoji" type="button" value="🏄"/>
-          <input class="message-list__item-message__emoji-picker__emoji" type="button" value="🚀"/>
-          <app-button (clickHandler)="$event.stopPropagation(); selectedMessageId = ''"
-                      className="message-list__item-message__emoji-picker__close-button"
-                      height="16"
-                      iconSrc="/assets/close.svg"
-                      type="button"
-                      variant="icon"
-                      width="16"
+        <div
+          *ngIf="selectedMessageId === message.id"
+          class="message-list__item-message__emoji-picker"
+        >
+          <input
+            class="message-list__item-message__emoji-picker__emoji"
+            type="button"
+            value="🐸"
+          />
+          <input
+            class="message-list__item-message__emoji-picker__emoji"
+            type="button"
+            value="😂"
+          />
+          <input
+            class="message-list__item-message__emoji-picker__emoji"
+            type="button"
+            value="🌊"
+          />
+          <input
+            class="message-list__item-message__emoji-picker__emoji"
+            type="button"
+            value="🏄"
+          />
+          <input
+            class="message-list__item-message__emoji-picker__emoji"
+            type="button"
+            value="🚀"
+          />
+          <app-button
+            (clickHandler)="$event.stopPropagation(); selectedMessageId = ''"
+            className="message-list__item-message__emoji-picker__close-button"
+            height="16"
+            iconSrc="/assets/close.svg"
+            type="button"
+            variant="icon"
+            width="16"
           ></app-button>
         </div>
 
         <div class="message-list__item-message-content">
-          <p>{{message.text}}</p>
+          <p>{{ message.text }}</p>
           <small
             *ngIf="utilsService.dayjs(message.created_at).isToday(); else date"
-            class="message-list__item-date">{{message.created_at | date:"HH:mm"}}</small>
-          <ng-template #date><small
-            class="message-list__item-date">{{message.created_at | date: "dd/MM/YYYY HH:mm"}}</small></ng-template>
+            class="message-list__item-date"
+            >{{ message.created_at | date: "HH:mm" }}</small
+          >
+          <ng-template #date
+            ><small class="message-list__item-date">{{
+              message.created_at | date: "dd/MM/YYYY HH:mm"
+            }}</small></ng-template
+          >
         </div>
       </button>
     </div>
