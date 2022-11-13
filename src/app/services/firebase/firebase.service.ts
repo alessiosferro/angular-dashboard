@@ -1,10 +1,11 @@
 import {Injectable} from "@angular/core";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {UserLogin} from "@/model/interfaces";
+import {Message, UserLogin} from "@/model/interfaces";
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
-import {filter, Observable, switchMap, throwError} from "rxjs";
+import {filter, map, Observable, switchMap, throwError} from "rxjs";
 import {GoogleAuthProvider} from 'firebase/auth';
 import {strings} from "../../../strings";
+import {AngularFireDatabase} from "@angular/fire/compat/database";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import {strings} from "../../../strings";
 export class FirebaseService {
   private googleAuthProvider = new GoogleAuthProvider();
 
-  constructor(private angularFireAuth: AngularFireAuth) {
+  constructor(private angularFireDatabase: AngularFireDatabase, private angularFireAuth: AngularFireAuth) {
   }
 
   signIn({email, password}: Partial<UserLogin>) {
@@ -28,6 +29,12 @@ export class FirebaseService {
       filter(user => !!user),
       switchMap(user => fromPromise(user!.sendEmailVerification()))
     );
+  }
+
+  getMessages(): Observable<Message[]> {
+    return this.angularFireDatabase.object<Message>('messages').valueChanges().pipe(
+      map(messages => Object.entries(messages!).reduce((acc, [id, value]) => [...acc, {id, ...value} as Message], [] as Message[]))
+    )
   }
 
   signOut() {

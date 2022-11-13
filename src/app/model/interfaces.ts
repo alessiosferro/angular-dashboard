@@ -45,6 +45,7 @@ export interface User {
 
 export interface Message {
   email: string;
+  id: string;
   text: string;
   displayName: string;
   photoURL: string;

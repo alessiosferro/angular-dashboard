@@ -4,10 +4,10 @@ import {map, merge, Observable, skip, switchMap, takeUntil} from "rxjs";
 import firebase from "firebase/compat";
 import {ActivatedRoute} from "@angular/router";
 import {Message} from "@/model/interfaces";
-import {AngularFireDatabase} from "@angular/fire/compat/database";
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
 import {DestroySubject} from "../../../classes/DestroySubject";
 import {UtilsService} from "@/services/utils/utils.service";
+import {FirebaseService} from "@/services/firebase/firebase.service";
 
 @Component({
   selector: 'app-dashboard-message-list',
@@ -17,13 +17,14 @@ import {UtilsService} from "@/services/utils/utils.service";
 })
 export class DashboardMessageListComponent extends DestroySubject implements OnInit, OnDestroy {
   notificationSound = new Audio('/assets/notification.mp3');
+  selectedMessageId = '';
 
   messages$!: Observable<Message[]>;
   user$!: Observable<firebase.User | null>;
 
   constructor(
     private activatedRouteService: ActivatedRoute,
-    private angularFireDatabaseService: AngularFireDatabase,
+    private firebaseService: FirebaseService,
     public angularFireAuthService: AngularFireAuth,
     public utilsService: UtilsService,
   ) {
@@ -33,7 +34,7 @@ export class DashboardMessageListComponent extends DestroySubject implements OnI
   ngOnInit(): void {
     this.messages$ = merge(
       this.activatedRouteService.data.pipe(map(data => data['messages'])),
-      this.angularFireDatabaseService.list<Message>('messages').valueChanges()
+      this.firebaseService.getMessages(),
     );
 
     this.messages$.pipe(
@@ -54,4 +55,7 @@ export class DashboardMessageListComponent extends DestroySubject implements OnI
     );
   }
 
+  addEmojiToMessage(): void {
+
+  }
 }

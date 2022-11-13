@@ -14,6 +14,8 @@ export class ButtonComponent implements OnInit {
   @Input() variant!: ButtonVariant;
   @Input() className: string | undefined;
   @Input() iconSrc: string | undefined;
+  @Input() height: string | undefined;
+  @Input() width: string | undefined;
   @Output() clickHandler = new EventEmitter<MouseEvent>();
 
   ngClass: { [key: string]: boolean } = {};
