@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
 import {FirebaseService} from "@/services/firebase/firebase.service";
 import {UtilsService} from "@/services/utils/utils.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -11,6 +11,7 @@ import firebase from 'firebase/compat';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginPageComponent implements OnInit {
   form!: FormGroup<AppForm<UserLogin>>;

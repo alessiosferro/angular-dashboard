@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
 
 @Component({
   selector: 'app-loading-spinner',
   templateUrl: './loading-spinner.component.html',
-  styleUrls: ['./loading-spinner.component.scss']
+  styleUrls: ['./loading-spinner.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoadingSpinnerComponent implements OnInit {
+export class LoadingSpinnerComponent implements AfterViewInit {
 
-  constructor() { }
+  constructor(private changeDetection: ChangeDetectorRef) {
+  }
 
-  ngOnInit(): void {
+  ngAfterViewInit() {
+    this.changeDetection.detach();
   }
 
 }

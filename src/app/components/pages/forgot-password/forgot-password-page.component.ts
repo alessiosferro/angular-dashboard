@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {AppLink, UserLogin} from "@/model/interfaces";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
@@ -6,6 +6,7 @@ import {fromPromise} from "rxjs/internal/observable/innerFrom";
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ForgotPasswordPageComponent {
   showSubmitMessage = false;

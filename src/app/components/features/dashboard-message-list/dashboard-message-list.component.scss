@@ -1,0 +1,54 @@
+.message-list {
+  padding: 2rem;
+  overflow: auto;
+  background: linear-gradient(to top, #03001e 0%, #7303c0 25%, #ec38bc 50%, #fdeff9 100%);
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1.6rem;
+
+  &__item {
+    display: flex;
+
+    &-date {
+      text-align: right;
+    }
+
+    &-container {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: flex-end;
+      gap: .8rem;
+    }
+
+    &--author {
+      margin-left: auto;
+    }
+
+    &-photo {
+      border-radius: 50%;
+    }
+
+    &-message {
+      background-color: #fafafa;
+      border: .1rem solid #aaa;
+      border-radius: .4rem;
+      width: fit-content;
+      display: flex;
+      padding: 1rem;
+      flex-flow: column nowrap;
+      word-break: break-word;
+      gap: .8rem;
+
+      &-content {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-end;
+        gap: 3rem;
+      }
+
+      &--author {
+        background-color: lighten(forestgreen, 57.5%);
+      }
+    }
+  }
+}

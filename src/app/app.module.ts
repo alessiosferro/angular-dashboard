@@ -22,7 +22,14 @@ import {ForgotPasswordPageComponent} from '@/components/pages/forgot-password/fo
 import {RegisterPageComponent} from '@/components/pages/register/register-page.component';
 import {AuthComponent} from './components/layouts/auth/auth.component';
 import {SafeHtmlPipe} from "./pipes/safe-html.pipe";
-import { LoadingSpinnerComponent } from './components/atoms/loading-spinner/loading-spinner.component';
+import {LoadingSpinnerComponent} from './components/atoms/loading-spinner/loading-spinner.component';
+import {DashboardHeaderComponent} from './components/features/dashboard-header/dashboard-header.component';
+import {
+  DashboardMessageListComponent
+} from './components/features/dashboard-message-list/dashboard-message-list.component';
+import {
+  DashboardMessageFormComponent
+} from './components/features/dashboard-message-form/dashboard-message-form.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +47,9 @@ import { LoadingSpinnerComponent } from './components/atoms/loading-spinner/load
     AuthComponent,
     SafeHtmlPipe,
     LoadingSpinnerComponent,
+    DashboardMessageListComponent,
+    DashboardMessageFormComponent,
+    DashboardHeaderComponent,
   ],
   imports: [
     BrowserModule,

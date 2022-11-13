@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {FirebaseService} from "@/services/firebase/firebase.service";
 import {UtilsService} from "@/services/utils/utils.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthComponent implements OnInit {
   @Input() title!: string;

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {AppLink, UserLogin} from "@/model/interfaces";
 import {switchMap, take} from "rxjs";
 import {FirebaseService} from "@/services/firebase/firebase.service";
@@ -9,6 +9,7 @@ import {UtilsService} from "@/services/utils/utils.service";
 @Component({
   selector: 'app-register',
   templateUrl: './register-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterPageComponent implements OnInit {
   form!: FormGroup<AppForm<UserLogin>>

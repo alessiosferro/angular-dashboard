@@ -1,0 +1,38 @@
+.dashboard-header {
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 2rem;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  gap: .8rem;
+  justify-content: space-between;
+  border-bottom: .1rem solid #aaa;
+
+  &__title {
+    white-space: nowrap;
+
+    &,
+    &-frog {
+      font-size: 2.4rem;
+      line-height: 3.8rem;
+    }
+
+    &-frog {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      margin-left: .2rem;
+    }
+
+    @media (min-width: 768px) {
+      &,
+      &-frog {
+        font-size: 3.2rem;
+        line-height: 3.85rem;
+      }
+    }
+  }
+}
