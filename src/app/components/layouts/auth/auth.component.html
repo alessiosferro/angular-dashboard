@@ -38,6 +38,7 @@
       ></app-button>
 
       <app-button (click)="googleHandler()"
+                  *ngIf="showGoogleLoginButton"
                   iconSrc="/assets/google.png"
                   type="button"
                   variant="icon"></app-button>

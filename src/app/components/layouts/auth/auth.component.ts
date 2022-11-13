@@ -17,6 +17,7 @@ export class AuthComponent implements OnInit {
   @Input() title!: string;
   @Input() copy: string | undefined;
   @Input() links: AppLink[] = [];
+  @Input() showGoogleLoginButton = false;
   @Input() hasPasswordControl = true;
   @Input() showResetPasswordMessage = false;
   @Input() showRegisterAccountMessage = false;
