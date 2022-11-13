@@ -1,8 +1,24 @@
 .login-form {
   width: 100%;
   display: flex;
-  flex-flow: column nowrap;
-  padding: 2rem;
+
+  &__container {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 2rem;
+    min-width: 50rem;
+    flex: 1;
+
+    @media (min-width: 768px) {
+      flex: inherit;
+    }
+  }
+
+  @media (min-width: 768px) {
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+  }
 
   &__title {
     margin: 0;
@@ -19,7 +35,7 @@
     }
   }
 
-  &,
+  &__container,
   &__actions {
     gap: 2.4rem;
   }
