@@ -6,11 +6,11 @@
     display: flex;
     flex-flow: column nowrap;
     padding: 2rem;
-    min-width: 50rem;
     flex: 1;
 
     @media (min-width: 768px) {
       flex: inherit;
+      min-width: 50rem;
     }
   }
 
