@@ -53,6 +53,9 @@
   height: calc(100vh - 7.95rem * 2);
   overflow: auto;
   background: linear-gradient(to top, #03001e 0%, #7303c0 25%, #ec38bc 50%, #fdeff9 100%);
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1.6rem;
 
   &__item {
     display: flex;
