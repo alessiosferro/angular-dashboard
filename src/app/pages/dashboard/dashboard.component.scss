@@ -90,12 +90,6 @@
         background-color: lighten(forestgreen, 57.5%);
       }
     }
-
-
-    &:not(:last-child):not(:first-child) {
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-    }
   }
 }
 
