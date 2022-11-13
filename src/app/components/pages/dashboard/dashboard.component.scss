@@ -50,7 +50,6 @@
 
 .message-list {
   padding: 2rem;
-  height: calc(100vh - 7.95rem * 2);
   overflow: auto;
   background: linear-gradient(to top, #03001e 0%, #7303c0 25%, #ec38bc 50%, #fdeff9 100%);
   display: flex;
@@ -98,7 +97,8 @@
   bottom: 0;
   padding: 2rem;
   align-items: center;
-  background-color: rgba(#fff, .8);
+  background-color: rgba(#fff, .9);
+  backdrop-filter: blur(.2rem);
   display: flex;
   justify-content: space-between;
   gap: 1.8rem;

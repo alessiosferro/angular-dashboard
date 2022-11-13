@@ -10,18 +10,19 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireAnalyticsModule} from "@angular/fire/compat/analytics";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
-import {LoginPageComponent} from "@/pages/login/login-page.component";
+import {LoginPageComponent} from "@/components/pages/login/login-page.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputComponent} from './components/atoms/input/input.component';
 import {InputTextComponent} from './components/atoms/input-text/input-text.component';
 import {InputPasswordComponent} from './components/atoms/input-password/input-password.component';
 import {InputEmailComponent} from './components/atoms/input-email/input-email.component';
 import {ButtonComponent} from "@/components/atoms/button/button.component";
-import {DashboardComponent} from "@/pages/dashboard/dashboard.component";
-import {ForgotPasswordPageComponent} from '@/pages/forgot-password/forgot-password-page.component';
-import {RegisterPageComponent} from '@/pages/register/register-page.component';
+import {DashboardComponent} from "@/components/pages/dashboard/dashboard.component";
+import {ForgotPasswordPageComponent} from '@/components/pages/forgot-password/forgot-password-page.component';
+import {RegisterPageComponent} from '@/components/pages/register/register-page.component';
 import {AuthComponent} from './components/layouts/auth/auth.component';
 import {SafeHtmlPipe} from "./pipes/safe-html.pipe";
+import { LoadingSpinnerComponent } from './components/atoms/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {SafeHtmlPipe} from "./pipes/safe-html.pipe";
     AuthComponent,
     AuthComponent,
     SafeHtmlPipe,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,

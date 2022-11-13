@@ -9,7 +9,7 @@
   </header>
 
   <main>
-    <section #messageList *ngIf="user$ | async as user" class="message-list">
+    <section *ngIf="user$ | async as user" class="message-list">
       <article *ngFor="let message of messages$ | async"
                class="message-list__item">
         <div [class.message-list__item--author]="user.email === message.email" class="message-list__item-container">

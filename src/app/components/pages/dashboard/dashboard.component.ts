@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  ViewChild
-} from "@angular/core";
+import {AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {filter, map, merge, Observable, skip, Subject, switchMap, take, takeUntil} from "rxjs";
 import firebase from "firebase/compat";
@@ -35,9 +27,6 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   maxLength = 2000;
   minLength = 1;
 
-  @ViewChild('messageList')
-  messageList!: ElementRef<HTMLDivElement>;
-
   constructor(
     private activatedRouteService: ActivatedRoute,
     private firebaseService: FirebaseService,
@@ -54,8 +43,6 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
       this.activatedRouteService.data.pipe(map(data => data['messages'])),
       this.firebaseRealtimeDatabaseService.list<Message>('messages').valueChanges()
     );
-
-    this.angularFireAuthService.user.subscribe(console.log);
 
     this.form = this.formBuilderService.group<AppForm<DashboardForm>>({
       text: this.formBuilderService.control('', [
@@ -74,7 +61,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.messages$.pipe(
       takeUntil(this.destroy$)
     ).subscribe(() => {
-      this.messageList.nativeElement.scrollTo({top: this.messageList.nativeElement.scrollHeight});
+      window.scrollTo({top: document.body.scrollHeight});
     });
 
     this.messages$.pipe(
