@@ -72,7 +72,7 @@
   margin-top: 1rem;
 }
 
-.message-list__item-message__emoji-picker__close-button {
+.close-button {
   position: absolute;
   top: -1.4rem;
   right: -1.4rem;
@@ -82,6 +82,6 @@
   background-color: $color-white;
   border-radius: 50%;
   width: 2.8rem;
-  border: 0.1rem solid $color-black;
+  border: 0.1rem solid $color-gray;
   height: 2.8rem;
 }

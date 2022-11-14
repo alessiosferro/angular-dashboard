@@ -1,15 +1,15 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
 } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { map, merge, Observable, skip, switchMap, takeUntil } from 'rxjs';
+import { map, merge, Observable } from 'rxjs';
 import firebase from 'firebase/compat';
 import { ActivatedRoute } from '@angular/router';
-import { Message } from '@/model/interfaces';
-import { fromPromise } from 'rxjs/internal/observable/innerFrom';
+import { EmojiSelected, Message, MessageEmoji } from '@/model/interfaces';
 import { DestroySubject } from '../../../classes/DestroySubject';
 import { UtilsService } from '@/services/utils/utils.service';
 import { FirebaseService } from '@/services/firebase/firebase.service';
@@ -24,8 +24,8 @@ export class DashboardMessageListComponent
   extends DestroySubject
   implements OnInit, OnDestroy
 {
-  notificationSound = new Audio('/assets/notification.mp3');
   selectedMessageId = '';
+  emojiSelected: EmojiSelected | null = null;
 
   messages$!: Observable<Message[]>;
   user$!: Observable<firebase.User | null>;
@@ -33,6 +33,7 @@ export class DashboardMessageListComponent
   constructor(
     private activatedRouteService: ActivatedRoute,
     private firebaseService: FirebaseService,
+    private cdRef: ChangeDetectorRef,
     public angularFireAuthService: AngularFireAuth,
     public utilsService: UtilsService
   ) {
@@ -45,25 +46,68 @@ export class DashboardMessageListComponent
       this.firebaseService.getMessages()
     );
 
-    this.messages$.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      window.scrollTo({ top: document.body.scrollHeight });
-    });
-
-    this.messages$
-      .pipe(
-        // skip first 2 emissions to avoid the DOM exception
-        skip(2),
-        switchMap(() => fromPromise(this.notificationSound.play())),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
-
     this.user$ = this.activatedRouteService.data.pipe(
       map((data) => data['user'])
     );
   }
 
-  addEmojiToMessage(): void {
-    return;
+  addEmojiHandler({
+    event,
+    message,
+  }: {
+    event: MouseEvent;
+    message: Message;
+  }): void {
+    const input = event.target as HTMLInputElement;
+
+    this.firebaseService
+      .addEmojiToMessage({
+        message,
+        emoji: input.value,
+      })
+      .subscribe(() => {
+        this.selectedMessageId = '';
+        this.cdRef.markForCheck();
+      });
+  }
+
+  openEmojiExplorer(params: {
+    event: MouseEvent;
+    selectedMessage: Message;
+    selectedEmoji: MessageEmoji;
+  }): void {
+    const { event, selectedMessage, selectedEmoji } = params;
+
+    event.stopPropagation();
+
+    this.emojiSelected = {
+      selectedMessage,
+      selectedEmoji,
+    };
+  }
+
+  getSelectedEmojis(): MessageEmoji[] {
+    if (!this.emojiSelected) return [];
+
+    return this.emojiSelected.selectedMessage.emojis.filter(
+      (messageEmoji) =>
+        messageEmoji.emoji === this.emojiSelected?.selectedEmoji.emoji
+    );
+  }
+
+  removeEmojiHandler(): void {
+    if (!this.emojiSelected) return;
+
+    console.log(this.emojiSelected);
+
+    const { selectedEmoji, selectedMessage } = this.emojiSelected;
+
+    this.firebaseService
+      .removeEmojiFromMessage(selectedMessage, selectedEmoji)
+      .subscribe(() => {
+        console.log('hello');
+        this.emojiSelected = null;
+        this.cdRef.detectChanges();
+      });
   }
 }

@@ -30,33 +30,81 @@
           class="message-list__item-message__emoji-picker"
         >
           <input
+            (click)="addEmojiHandler({ event: $event, message })"
             class="message-list__item-message__emoji-picker__emoji"
             type="button"
             value="🐸"
           />
           <input
+            (click)="addEmojiHandler({ event: $event, message })"
             class="message-list__item-message__emoji-picker__emoji"
             type="button"
             value="😂"
           />
           <input
+            (click)="addEmojiHandler({ event: $event, message })"
             class="message-list__item-message__emoji-picker__emoji"
             type="button"
             value="🌊"
           />
-          <input
-            class="message-list__item-message__emoji-picker__emoji"
-            type="button"
-            value="🏄"
-          />
-          <input
-            class="message-list__item-message__emoji-picker__emoji"
-            type="button"
-            value="🚀"
-          />
           <app-button
             (clickHandler)="$event.stopPropagation(); selectedMessageId = ''"
-            className="message-list__item-message__emoji-picker__close-button"
+            className="close-button"
+            height="16"
+            iconSrc="/assets/close.svg"
+            type="button"
+            variant="icon"
+            width="16"
+          ></app-button>
+        </div>
+
+        <div
+          *ngIf="
+            !emojiSelected || emojiSelected?.selectedMessage?.id !== message.id
+          "
+          class="message-list__item-emoji-count"
+        >
+          <button
+            (click)="
+              openEmojiExplorer({
+                event: $event,
+                selectedMessage: message,
+                selectedEmoji: messageEmoji
+              })
+            "
+            *ngFor="let messageEmoji of message.emojis"
+            class="message-list__item-emoji"
+            type="button"
+          >
+            {{ messageEmoji.emoji }}
+          </button>
+        </div>
+
+        <div
+          (click)="$event.stopPropagation()"
+          *ngIf="emojiSelected?.selectedMessage?.id === message.id"
+          class="message-list__emoji-explorer"
+        >
+          <div
+            *ngFor="let emoji of getSelectedEmojis()"
+            class="message-list__emoji-explorer-item"
+          >
+            <span>{{ emoji.emoji }}</span
+            ><span>({{ emoji.email }})</span>
+
+            <app-button
+              (clickHandler)="removeEmojiHandler()"
+              class="close-explorer-button"
+              height="10"
+              iconSrc="/assets/close.svg"
+              variant="icon"
+              width="10"
+            ></app-button>
+          </div>
+
+          <app-button
+            (clickHandler)="$event.stopPropagation(); emojiSelected = null"
+            className="close-button"
             height="16"
             iconSrc="/assets/close.svg"
             type="button"

@@ -14,11 +14,51 @@
   flex-flow: column nowrap;
   gap: 1.6rem;
 
+  &__emoji-explorer {
+    position: absolute;
+    top: -0.1rem;
+    left: -0.1rem;
+    min-width: 100%;
+    border-radius: 0.4rem;
+    padding: 1.6rem;
+    min-height: calc(100% + 0.2rem);
+    border: 0.1rem solid $color-gray;
+    background-color: $color-white;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0.8rem;
+
+    &-item {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 0.8rem;
+      align-items: center;
+      white-space: nowrap;
+    }
+  }
+
   &__item {
     border: none;
     background: none;
     position: relative;
     display: flex;
+
+    &-emoji {
+      background-color: $color-white;
+      border-radius: 50%;
+      padding: 0.2rem 0.4rem;
+      font-size: 1rem;
+      border: 0.1rem solid $color-gray;
+      cursor: pointer;
+    }
+
+    &-emoji-count {
+      display: flex;
+      position: absolute;
+      bottom: -1.4rem;
+      right: 0.5rem;
+      gap: 0.4rem;
+    }
 
     &-date {
       text-align: right;
@@ -57,13 +97,15 @@
       &__emoji-picker {
         position: absolute;
         display: flex;
-        border: 0.1rem solid $color-gray-light;
+        border: 0.1rem solid $color-gray;
         flex-flow: row wrap;
-        align-items: flex-end;
+        justify-content: center;
+        align-items: center;
         gap: 1.2rem;
-        left: 0;
-        top: 0;
-        z-index: 1;
+        width: calc(100% + 0.2rem);
+        top: -0.1rem;
+        left: -0.1rem;
+        min-height: calc(100% + 0.2rem);
         backdrop-filter: blur(0.2rem);
         background: $color-white-alpha-90;
         padding: 1rem;

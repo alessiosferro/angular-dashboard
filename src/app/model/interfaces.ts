@@ -39,6 +39,16 @@ export interface User {
   appName: string;
 }
 
+export interface MessageEmoji {
+  email: string;
+  emoji: string;
+}
+
+export interface EmojiSelected {
+  selectedMessage: Message;
+  selectedEmoji: MessageEmoji;
+}
+
 export interface Message {
   email: string;
   id: string;
@@ -46,6 +56,7 @@ export interface Message {
   displayName: string;
   photoURL: string;
   created_at: string;
+  emojis: MessageEmoji[];
 }
 
 export interface UserLoginResponse {

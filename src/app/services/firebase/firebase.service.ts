@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Message, UserLogin } from '@/model/interfaces';
+import { Message, MessageEmoji, UserLogin } from '@/model/interfaces';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { filter, map, Observable, switchMap, throwError } from 'rxjs';
 import { GoogleAuthProvider } from 'firebase/auth';
@@ -37,6 +37,33 @@ export class FirebaseService {
     );
   }
 
+  addEmojiToMessage({
+    message,
+    emoji,
+  }: {
+    message: Message;
+    emoji: string;
+  }): Observable<void> {
+    return this.angularFireAuth.user.pipe(
+      switchMap((user) =>
+        fromPromise(
+          this.angularFireDatabase.object('messages').update({
+            [message.id]: {
+              ...message,
+              emojis: [
+                ...(message.emojis ? message.emojis : []),
+                {
+                  email: user?.email,
+                  emoji,
+                },
+              ],
+            },
+          })
+        )
+      )
+    );
+  }
+
   getMessages(): Observable<Message[]> {
     return this.angularFireDatabase
       .object<Message>('messages')
@@ -58,6 +85,29 @@ export class FirebaseService {
   loginWithGoogle() {
     return fromPromise(
       this.angularFireAuth.signInWithPopup(this.googleAuthProvider)
+    );
+  }
+
+  removeEmojiFromMessage(
+    message: Message,
+    emojiSelected: MessageEmoji
+  ): Observable<void> {
+    return this.angularFireAuth.user.pipe(
+      filter((user) => !!user),
+      switchMap((user) =>
+        fromPromise(
+          this.angularFireDatabase.object('messages').update({
+            [message.id]: {
+              ...message,
+              emojis: message.emojis.filter(
+                (emoji) =>
+                  emojiSelected.email !== user?.email &&
+                  emoji.emoji !== emojiSelected.emoji
+              ),
+            },
+          })
+        )
+      )
     );
   }
 
