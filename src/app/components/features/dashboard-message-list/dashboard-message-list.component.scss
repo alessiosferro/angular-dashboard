@@ -22,6 +22,7 @@
 
     &-date {
       text-align: right;
+      white-space: nowrap;
     }
 
     &-container {
@@ -42,8 +43,10 @@
     &-message {
       background-color: $color-gray-light;
       border: 0.1rem solid $color-gray;
+      text-align: left;
       border-radius: 0.4rem;
       width: fit-content;
+
       display: flex;
       padding: 1rem;
       flex-flow: column nowrap;
