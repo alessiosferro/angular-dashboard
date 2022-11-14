@@ -44,20 +44,16 @@
     display: flex;
 
     &-emoji {
-      background-color: $color-white;
-      border-radius: 50%;
-      padding: 0.2rem 0.4rem;
-      font-size: 1rem;
-      border: 0.1rem solid $color-gray;
+      background-color: $color-gray-80;
+      border-radius: 1.2rem;
+      padding: 0.2rem 0.8rem;
+      font-size: 1.2rem;
       cursor: pointer;
     }
 
     &-emoji-count {
       display: flex;
-      position: absolute;
-      bottom: -1.4rem;
-      right: 0.5rem;
-      gap: 0.4rem;
+      gap: 0.6rem;
     }
 
     &-date {
@@ -86,7 +82,6 @@
       text-align: left;
       border-radius: 0.4rem;
       width: fit-content;
-
       display: flex;
       padding: 1rem;
       flex-flow: column nowrap;
@@ -133,6 +128,14 @@
         flex-flow: row nowrap;
         align-items: flex-end;
         gap: 3rem;
+
+        &__text {
+          font-size: 1.4rem;
+
+          @media (min-width: 768px) {
+            font-size: 1.6rem;
+          }
+        }
       }
 
       &--author {

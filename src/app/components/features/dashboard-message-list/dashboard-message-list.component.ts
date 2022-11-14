@@ -51,13 +51,9 @@ export class DashboardMessageListComponent
     );
   }
 
-  addEmojiHandler({
-    event,
-    message,
-  }: {
-    event: MouseEvent;
-    message: Message;
-  }): void {
+  addEmojiHandler(params: { event: MouseEvent; message: Message }): void {
+    const { event, message } = params;
+
     const input = event.target as HTMLInputElement;
 
     this.firebaseService
@@ -97,8 +93,6 @@ export class DashboardMessageListComponent
 
   removeEmojiHandler(): void {
     if (!this.emojiSelected) return;
-
-    console.log(this.emojiSelected);
 
     const { selectedEmoji, selectedMessage } = this.emojiSelected;
 

@@ -59,28 +59,6 @@
         </div>
 
         <div
-          *ngIf="
-            !emojiSelected || emojiSelected?.selectedMessage?.id !== message.id
-          "
-          class="message-list__item-emoji-count"
-        >
-          <button
-            (click)="
-              openEmojiExplorer({
-                event: $event,
-                selectedMessage: message,
-                selectedEmoji: messageEmoji
-              })
-            "
-            *ngFor="let messageEmoji of message.emojis"
-            class="message-list__item-emoji"
-            type="button"
-          >
-            {{ messageEmoji.emoji }}
-          </button>
-        </div>
-
-        <div
           (click)="$event.stopPropagation()"
           *ngIf="emojiSelected?.selectedMessage?.id === message.id"
           class="message-list__emoji-explorer"
@@ -114,7 +92,9 @@
         </div>
 
         <div class="message-list__item-message-content">
-          <p>{{ message.text }}</p>
+          <p class="message-list__item-message-content__text">
+            {{ message.text }}
+          </p>
           <small
             *ngIf="utilsService.dayjs(message.created_at).isToday(); else date"
             class="message-list__item-date"
@@ -125,6 +105,31 @@
               message.created_at | date: "dd/MM/YYYY HH:mm"
             }}</small></ng-template
           >
+        </div>
+
+        <div
+          *ngIf="
+            message.emojis &&
+            message.emojis.length > 0 &&
+            (!emojiSelected ||
+              emojiSelected?.selectedMessage?.id !== message.id)
+          "
+          class="message-list__item-emoji-count"
+        >
+          <button
+            (click)="
+              openEmojiExplorer({
+                event: $event,
+                selectedMessage: message,
+                selectedEmoji: messageEmoji
+              })
+            "
+            *ngFor="let messageEmoji of message.emojis"
+            class="message-list__item-emoji"
+            type="button"
+          >
+            {{ messageEmoji.emoji }}
+          </button>
         </div>
       </button>
     </div>
